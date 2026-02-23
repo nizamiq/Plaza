@@ -1,0 +1,48 @@
+id: phase_02_integration
+title: "Phase 02: Ecosystem Integration"
+description: "Integrate Plaza services with the NizamIQ ecosystem: Aegis governance, Recce agents, and meridian platform."
+
+tasks:
+  - id: T02.1
+    title: "Integrate with Aegis governance"
+    description: "Implement Aegis SDK integration for authorization, audit logging, and policy enforcement across all Plaza services."
+    verification: "All service calls are authorized and logged via Aegis"
+    status: PENDING
+
+  - id: T02.2
+    title: "Integrate with Recce research agent"
+    description: "Configure Plaza as the tool provider for Recce agent. Ensure seamless tool invocation and result handling."
+    verification: "Recce can successfully invoke all Plaza tools"
+    status: PENDING
+
+  - id: T02.3
+    title: "Integrate with meridian platform"
+    description: "Enable Plaza services for meridian's research automation and intelligence gathering workflows."
+    verification: "Meridian workflows use Plaza tools for web interactions"
+    status: PENDING
+
+  - id: T02.4
+    title: "Implement Zitadel authentication"
+    description: "Configure OIDC authentication via Zitadel for all Plaza services. Support service-to-service authentication."
+    verification: "All services authenticate requests via Zitadel tokens"
+    status: PENDING
+
+  - id: T02.5
+    title: "Create API documentation"
+    description: "Document all service APIs using OpenAPI 3.0 specification. Include authentication, error responses, and examples."
+    verification: "Complete OpenAPI specs available for all services"
+    status: PENDING
+
+dependencies:
+  - Phase 01 completion
+  - Aegis SDK available
+  - Zitadel configured
+
+completion_criteria:
+  - "Aegis governance integrated and enforced"
+  - "Recce agent can invoke all tools"
+  - "Meridian workflows operational"
+  - "Zitadel authentication configured"
+  - "API documentation complete"
+
+estimated_duration: "2-3 weeks"

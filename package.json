@@ -1,0 +1,68 @@
+{
+  "name": "@nizamiq/plaza",
+  "version": "0.1.0",
+  "description": "Plaza - MCP Tooling Platform: Universal Scraper, Browser Automation, Web Search",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./universal-scraper": {
+      "import": "./dist/universal-scraper/index.js",
+      "types": "./dist/universal-scraper/index.d.ts"
+    },
+    "./browser-automation": {
+      "import": "./dist/browser-automation/index.js",
+      "types": "./dist/browser-automation/index.d.ts"
+    },
+    "./web-search": {
+      "import": "./dist/web-search/index.js",
+      "types": "./dist/web-search/index.d.ts"
+    }
+  },
+  "bin": {
+    "plaza": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "mcp",
+    "scraper",
+    "browser",
+    "automation",
+    "web-search",
+    "playwright",
+    "cheerio"
+  ],
+  "author": "NizamIQ",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "bottleneck": "^2.19.0",
+    "cheerio": "^1.0.0",
+    "p-retry": "^6.0.0",
+    "pdf-parse": "^1.1.1",
+    "playwright": "^1.40.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/pdf-parse": "^1.1.4",
+    "tsx": "^4.0.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

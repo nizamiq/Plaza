@@ -1,0 +1,71 @@
+id: phase_01_core_services
+title: "Phase 01: Core MCP Services"
+description: "Implement the core MCP services extracted from meridian-prime: Universal Scraper, Browser Automation, Web Search."
+status: COMPLETE
+completed_at: "2026-02-23"
+
+tasks:
+  - id: T01.1
+    title: "Implement Universal Scraper service"
+    description: "Port the universal scraper from meridian-prime. Handle HTML and in-transit PDFs with robust error handling."
+    verification: "Scraper service handles HTML and PDF extraction with >95% success rate"
+    status: COMPLETE
+    completed_at: "2026-02-23"
+    proof_of_work: "src/universal-scraper/ with scraper.ts, pdf-handler.ts, types.ts - Axios-based scraping, Cheerio parsing, PDF extraction"
+
+  - id: T01.2
+    title: "Implement Browser Automation service"
+    description: "Implement Playwright-based browser automation for complex web interactions. Support headless mode, proxy rotation, and anti-detection."
+    verification: "Browser automation completes common workflows (login, navigation, extraction)"
+    status: COMPLETE
+    completed_at: "2026-02-23"
+    proof_of_work: "src/browser-automation/ with playwright-wrapper.ts, types.ts - Playwright wrapper, headless mode, anti-detection, screenshots"
+
+  - id: T01.3
+    title: "Implement Web Search service"
+    description: "Create unified interface to multiple search providers (Exa, Serper, Perplexity). Support result aggregation and ranking."
+    verification: "Search service returns results from all configured providers"
+    status: COMPLETE
+    completed_at: "2026-02-23"
+    proof_of_work: "src/web-search/ with providers/exa.ts, serper.ts, perplexity.ts, aggregator.ts - Multi-provider search with failover"
+
+  - id: T01.4
+    title: "Create shared utilities library"
+    description: "Extract common utilities, types, and helpers into shared module. Include rate limiting, retry logic, and error handling."
+    verification: "Shared module provides reusable components for all services"
+    status: COMPLETE
+    completed_at: "2026-02-23"
+    proof_of_work: "src/shared/ with rate-limiter.ts (Bottleneck), retry.ts (p-retry), errors.ts (6 error types), types.ts"
+
+  - id: T01.5
+    title: "Implement service health endpoints"
+    description: "Add health check and readiness endpoints for all services. Support Kubernetes probes."
+    verification: "All services respond to /health and /ready endpoints"
+    status: COMPLETE
+    completed_at: "2026-02-23"
+    proof_of_work: "src/health/health-check.ts - Health check service with status reporting"
+
+  - id: T01.6
+    title: "Create configuration and test files"
+    description: "Set up package.json, tsconfig.json, .env.example, and basic test files."
+    verification: "Project builds and tests run"
+    status: COMPLETE
+    completed_at: "2026-02-23"
+    proof_of_work: "package.json, tsconfig.json, .env.example, vitest.config.ts, tests/ directory with 6 test files"
+
+dependencies:
+  - Phase 00 completion
+
+completion_criteria:
+  - criterion: "All three core services implemented and tested"
+    status: COMPLETE
+  - criterion: "Shared utilities extracted and documented"
+    status: COMPLETE
+  - criterion: "Health endpoints operational"
+    status: COMPLETE
+  - criterion: "Services containerized and ready for deployment"
+    status: PENDING
+    note: "Containerization occurs in Phase 03"
+
+estimated_duration: "3-4 weeks"
+actual_duration: "1 day (initial implementation)"
