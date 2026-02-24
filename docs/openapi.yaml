@@ -1,0 +1,96 @@
+openapi: 3.0.0
+info:
+  title: Plaza MCP Platform API
+  version: 0.1.0
+  description: API for the Plaza MCP Tooling Platform providing Universal Scraper, Browser Automation, and Web Search.
+servers:
+  - url: /v1
+    description: v1 API
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []
+paths:
+  /scrape:
+    post:
+      summary: Scrape a URL
+      description: Extract content from a webpage or PDF.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+                options:
+                  type: object
+                  properties:
+                    raw:
+                      type: boolean
+              required:
+                - url
+      responses:
+        '200':
+          description: Scraped content
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Server error
+
+  /search:
+    post:
+      summary: Web search
+      description: Search across configured providers (Exa, Serper, Perplexity).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                limit:
+                  type: integer
+              required:
+                - query
+      responses:
+        '200':
+          description: Search results
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Server error
+
+  /healthz:
+    get:
+      summary: Health check
+      security: []
+      responses:
+        '200':
+          description: Service is healthy
+        '503':
+          description: Service is unhealthy
+
+  /readyz:
+    get:
+      summary: Readiness check
+      security: []
+      responses:
+        '200':
+          description: Service is ready
