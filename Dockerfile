@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM mcr.microsoft.com/playwright:v1.40.0-jammy
 
 WORKDIR /app
 
@@ -13,6 +13,9 @@ COPY . .
 
 # Build TypeScript
 RUN npm run build
+
+# Install playwright browsers
+RUN npx playwright install chromium
 
 # Expose ports
 EXPOSE 8000
