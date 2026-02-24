@@ -1,29 +1,29 @@
 ---
-id: plaza-context-v1
+id: plaza-context-v2
 title: "Plaza: AI Agent Context"
-description: "Primary entry point for AI agents working on the Plaza MCP Tooling Platform."
+description: "Primary entry point for AI agents working on the Plaza MCP Tooling Platform. This version reflects the formal porting plan from meridian-prime."
 tags: [context, plaza, mcp, agents]
-status: DRAFT
-last_audited: "2026-02-23"
+status: ACTIVE
+last_audited: "2026-02-24"
 authoritative_source: "CONTEXT.md"
-version: 1.0.0
+version: 2.0.0
 ---
 
-# CONTEXT.md
+# CONTEXT.md (v2.0)
 
-**LAST UPDATED:** 2026-02-23
+**LAST UPDATED:** 2026-02-24
 
-## 1. System Architecture
+## 1. System Architecture & Purpose
 
 Plaza is the central, authoritative, and generic **agentic tooling platform** for the NizamIQ ecosystem. It provides a suite of reliable, production-grade tools (as MCP services) that can be consumed by any agent or service. Born from the February 2026 ecosystem audit, Plaza extracts and generalizes the MCP tooling layer originally developed in `meridian-prime`. It serves as a standalone, licensable product offering Tooling-as-a-Service capabilities.
 
-## 2. Dependency Map
+## 2. Dependency & Integration Map
 
-- **Languages:** TypeScript/JavaScript, Python
+- **Languages:** TypeScript (Primary), Python (for specific ML/data science tools)
 - **Frameworks/Runtimes:** Node.js, MCP (Model Context Protocol)
-- **Key Libraries:** Playwright, Axios, Cheerio, Puppeteer
-- **Databases:** Redis (caching), PostgreSQL (metadata)
-- **Cloud Services:** AWS/GCP (deployment), Docker (containerization)
+- **Key Libraries:** Playwright, Axios, Cheerio
+- **Databases:** Redis (caching), PostgreSQL (metadata, optional)
+- **Consumers:** `nizamiq/meridian`, and any other agentic system in the ecosystem.
 
 ## 3. Execution Commands
 
@@ -36,44 +36,54 @@ Plaza is the central, authoritative, and generic **agentic tooling platform** fo
 | **Run Locally** | `npm run dev` |
 | **Start MCP Server** | `npm run start:mcp` |
 
-## 4. CI/CD Pipeline
+## 4. CI/CD Pipeline (NizamIQ Golden Pipeline)
 
-This repository uses the **NizamIQ Golden Pipeline** standard. All pull requests are subject to the following mandatory gates:
+This repository uses the **NizamIQ Golden Pipeline** standard. All pull requests are subject to mandatory gates for code quality, testing, AI review, and security scanning.
 
-| Gate | Name | Description |
-| :--- | :--- | :--- |
-| 1 | **Code Quality** | Enforces consistent code style and catches basic errors using linters and formatters. |
-| 2 | **Verifiable Truth** | Ensures the code functions as expected via unit and integration tests. |
-| 3 | **AI Autonomous Review** | Performs deep, semantic code review to identify complex bugs and enforce standards. |
-| 4 | **Build & Security** | Verifies that the application builds correctly and scans the final artifact for vulnerabilities. |
+-   **Workflow File:** `.github/workflows/ci.yml`
 
-**Workflow File:** [`.github/workflows/ci.yml`](./.github/workflows/ci.yml)
-
-## 5. Project Structure
+## 5. Project Structure & Key Artefacts
 
 ```
 Plaza/
 ├── docs/
 │   ├── architecture/     # System design and component diagrams
 │   ├── api/              # API contracts and interface definitions
-│   ├── governance/       # AI agent instructions and CI/CD standards
-│   └── planning/         # Phase definitions, AGENTS.md, DEBT.md, manifest.json
+│   └── planning/
+│       ├── artefacts/
+│       │   └── meridian_prime_porting_plan.md  # Defines the backlog from meridian-prime
+│       ├── phases/             # YAML files for each project phase
+│       └── manifest.json       # Machine-readable project status
 ├── src/                  # Source code for MCP services
+│   ├── browser-automation/ # Playwright wrapper
+│   ├── universal-scraper/  # Axios/Cheerio web scraper
+│   └── web-search/         # Exa/Serper/Perplexity aggregator
 ├── CONTEXT.md            # This file - AI agent entry point
-├── README.md             # Human-readable project overview
-└── AGENTS.md             # Agent scope check and guidelines
+└── README.md             # Human-readable project overview
 ```
 
-## 6. Key Features
+## 6. Key Features & Porting Backlog
 
-- **Universal Scraper:** Robust web scraper handling HTML and in-transit PDFs
-- **Browser Automation:** Production-grade Playwright integration
-- **Web Search:** Unified interface to multiple search providers (Exa, Serper, Perplexity)
-- **Data Enrichment:** LinkedIn data scraping and other enrichment services
-- **Intelligence Search:** Intent detection and cross-referencing capabilities
+Plaza's backlog is now formally defined by the `meridian-prime` porting plan. The core mandate is to port and productionize the generic tools from that pilot project.
 
-## 7. Current Phase
+| Feature | Porting Status | Source in `meridian-prime` |
+| :--- | :--- | :--- |
+| **Universal Scraper** | **COMPLETE** (Phase 01) | `mcp_services/universal_scraper` |
+| **Browser Automation** | **COMPLETE** (Phase 01) | `mcp_services/playwright_tool` |
+| **Web Search** | **COMPLETE** (Phase 01) | `mcp_services/search_tool` |
+| **MCP Framework** | **COMPLETE** (Phase 02) | `mcp_services/mcp_framework` |
+| **News Search** | **PENDING** | `mcp_services/news_search` |
+| **LinkedIn Data Enrichment** | **PENDING** | `mcp_services/linkedin_data` |
+| **Datetime Tool** | **PENDING** | `mcp_services/datetime_tool` |
 
-**Phase 00: Project Initialization**
+## 7. Current Phase & Key Objectives
 
-See [manifest.json](./docs/planning/manifest.json) for detailed phase information.
+**Current Phase:** `03_packaging`
+
+With the core services ported and integrated, the immediate focus is on packaging Plaza for deployment and distribution.
+
+-   **Create Docker Images:** Build optimized, multi-architecture Docker images for all services.
+-   **Create Kubernetes Manifests:** Develop production-ready Kubernetes deployment configurations.
+-   **Define Licensing Model:** Formalize the licensing terms for both internal and external use.
+
+See the [planning manifest](./docs/planning/manifest.json) and [Phase 03 plan](./docs/planning/phases/phase_03_packaging.yaml) for details.

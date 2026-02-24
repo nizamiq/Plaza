@@ -1,6 +1,6 @@
 {
   "project_name": "Plaza",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "total_phases": 4,
   "completed_phases": ["00", "01", "02"],
   "current_phase": "03",
@@ -20,7 +20,7 @@
   },
   "status": "IN_PROGRESS",
   "last_updated": "2026-02-24",
-  "last_updated_by": "Orchestrator Agent",
+  "last_updated_by": "Manus AI",
   "phase_02_completion": {
     "tasks_completed": 5,
     "tasks_total": 5,
