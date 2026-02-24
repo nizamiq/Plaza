@@ -14,9 +14,6 @@ COPY . .
 # Build TypeScript
 RUN npm run build
 
-# Install playwright browsers
-RUN npx playwright install chromium
-
 # Expose ports
 EXPOSE 8000
 
