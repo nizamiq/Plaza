@@ -15,7 +15,7 @@ version: 2.0.0
 
 ## 1. System Architecture & Purpose
 
-Plaza is the central, authoritative, and generic **agentic tooling platform** for the NizamIQ ecosystem. It provides a suite of reliable, production-grade tools (as MCP services) that can be consumed by any agent or service. Born from the February 2026 ecosystem audit, Plaza extracts and generalizes the MCP tooling layer originally developed in `meridian-prime`. It serves as a standalone, licensable product offering Tooling-as-a-Service capabilities.
+Plaza is the central, authoritative, and generic **agentic tooling platform** for the NizamIQ ecosystem. It provides a suite of reliable, production-grade tools (as MCP services) that can be consumed by any agent or service. Born from the February 2026 ecosystem audit, Plaza extracts and generalizes the MCP tooling layer originally developed in `meridian-prime`. It serves as a standalone, licensable product offering Tooling-as-a-Service capabilities. It is a key tool consumed by the `Tracer` agentic engine.
 
 ## 2. Dependency & Integration Map
 
