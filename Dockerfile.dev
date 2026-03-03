@@ -1,0 +1,22 @@
+# Development Dockerfile - faster builds, larger image
+FROM mcr.microsoft.com/playwright:v1.58.2-jammy
+
+WORKDIR /app
+
+# Copy package files
+COPY package.json package-lock.json* ./
+
+# Install all dependencies (including dev)
+RUN npm ci || npm install
+
+# Copy source code
+COPY . .
+
+# Build TypeScript
+RUN npm run build
+
+# Expose ports
+EXPOSE 8000
+
+# Start API server by default (override for MCP server)
+CMD ["node", "./dist/api-server.js"]

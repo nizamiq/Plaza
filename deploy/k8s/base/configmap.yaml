@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: plaza-config
+  namespace: plaza
+  labels:
+    app.kubernetes.io/name: plaza
+    app.kubernetes.io/component: config
+data:
+  NODE_ENV: "production"
+  PORT: "8000"
+  LOG_LEVEL: "info"
+  SCRAPER_TIMEOUT: "30000"
+  SCRAPER_USER_AGENT: "Mozilla/5.0 (compatible; PlazaBot/1.0)"
+  BROWSER_HEADLESS: "true"
+  BROWSER_TIMEOUT: "30000"
+  BROWSER_VIEWPORT_WIDTH: "1920"
+  BROWSER_VIEWPORT_HEIGHT: "1080"
+  BROWSER_ANTI_DETECTION: "true"
+  EXA_ENABLED: "false"
+  SERPER_ENABLED: "false"
+  PERPLEXITY_ENABLED: "false"
+  PERPLEXITY_MODEL: "llama-3.1-sonar-small-128k-online"
+  RATE_LIMIT_REQUESTS_PER_MINUTE: "100"
+  RATE_LIMIT_CONCURRENT: "5"
+  RETRY_MAX_ATTEMPTS: "3"
+  RETRY_MIN_TIMEOUT: "1000"
+  RETRY_MAX_TIMEOUT: "30000"

@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  plaza:
+    image: ghcr.io/nizamiq/plaza:latest
+    container_name: plaza
+    ports:
+      - "8000:8000"
+    environment:
+      - NODE_ENV=production
+      - PORT=8000
+      - LOG_LEVEL=warn
+      # Required: Set these via environment or .env file
+      - EXA_API_KEY=${EXA_API_KEY}
+      - SERPER_API_KEY=${SERPER_API_KEY}
+      - PERPLEXITY_API_KEY=${PERPLEXITY_API_KEY}
+      # Aegis configuration
+      - AEGIS_ENABLED=${AEGIS_ENABLED:-true}
+      - AEGIS_URL=${AEGIS_URL}
+      - AEGIS_API_KEY=${AEGIS_API_KEY}
+      # Rate limiting
+      - RATE_LIMIT_REQUESTS_PER_MINUTE=${RATE_LIMIT_REQUESTS_PER_MINUTE:-100}
+      - RATE_LIMIT_CONCURRENT=${RATE_LIMIT_CONCURRENT:-10}
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8000/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    networks:
+      - plaza-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: plaza-redis
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+    networks:
+      - plaza-network
+
+volumes:
+  redis-data:
+
+networks:
+  plaza-network:
+    driver: bridge

@@ -8,7 +8,16 @@ build/
 *.log
 .git/
 .gitignore
+.github/
 *.md
 docs/
 Dockerfile*
 .dockerignore
+deploy/
+tests/
+.vscode/
+.idea/
+*.test.ts
+*.spec.ts
+coverage/
+.nyc_output/
