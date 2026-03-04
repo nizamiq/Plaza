@@ -48,6 +48,9 @@ jobs:
       - name: Install dependencies
         run: npm ci || npm install
       
+      - name: Install Playwright browsers
+        run: npx playwright install chromium
+      
       - name: Run tests
         run: npm test -- --coverage || npm test || echo "Tests need setup"
       
