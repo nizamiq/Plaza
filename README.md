@@ -2,11 +2,11 @@
 id: plaza-readme-v1
 title: "Plaza: The NizamIQ Tooling Platform"
 description: "Human-readable project overview for the Plaza MCP tooling platform."
-tags: [readme, plaza, mcp, tooling, overview]
-status: DRAFT
+tags: [readme, plaza, mcp, tooling, overview, architecture, oac]
+status: STABLE
 last_audited: "2026-03-04"
 authoritative_source: "README.md"
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Plaza
@@ -14,6 +14,12 @@ version: 1.0.0
 **The Generic MCP Tooling Platform for the NizamIQ Ecosystem**
 
 Plaza provides the fundamental, domain-agnostic MCP (Model Context Protocol) tools that empower AI agents to interact with the digital world.
+
+## Place in the Ecosystem
+
+Plaza occupies **L3: Tooling Platform** of the [NizamIQ 7-Layer Agentic Architecture](https://github.com/nizamiq/nizamiq-strategy/blob/main/03_technical/agentic_architecture.md). Its primary responsibility is to provide a suite of generic, reusable Model Context Protocol (MCP) tools, such as web search, scraping, and browser automation. It interacts with L2: Conversational Orchestrator (Tracer) by providing the tools that Tracer orchestrates, and with L6: Specialised Pipelines (Atlas, Recce, anchorlink) by offering foundational tooling for their operations.
+
+Plaza is also a key component in the [ADR-011 Declarative Organisation as Code Framework](https://github.com/nizamiq/nizamiq-strategy/blob/main/docs/architecture/ADR_011_Declarative_OaC.md), where it is referenced as a provider of required tools and pipelines within the `Playbook` manifest.
 
 ## Overview
 
