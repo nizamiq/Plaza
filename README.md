@@ -1,62 +1,55 @@
 ---
 id: plaza-readme-v1
-title: "Plaza: MCP Tooling Platform"
-description: "Human-readable project overview for the Plaza agentic tooling platform."
-tags: [readme, plaza, mcp, overview]
+title: "Plaza: The NizamIQ Tooling Platform"
+description: "Human-readable project overview for the Plaza MCP tooling platform."
+tags: [readme, plaza, mcp, tooling, overview]
 status: DRAFT
-last_audited: "2026-02-23"
+last_audited: "2026-03-04"
 authoritative_source: "README.md"
 version: 1.0.0
 ---
 
 # Plaza
 
-**The Generic Agentic Tooling Platform for the NizamIQ Ecosystem**
+**The Generic MCP Tooling Platform for the NizamIQ Ecosystem**
 
-Plaza is a standalone, licensable MCP (Model Context Protocol) tooling platform that provides production-grade tools for AI agents to interact with the digital world.
+Plaza provides the fundamental, domain-agnostic MCP (Model Context Protocol) tools that empower AI agents to interact with the digital world.
 
 ## Overview
 
-Born from the February 2026 ecosystem audit, Plaza extracts and generalizes the mature MCP tooling layer originally developed in `meridian-prime`. It serves as the central, authoritative tooling platform for the entire NizamIQ ecosystem—and can be licensed as a standalone product.
+Born from the February 2026 ecosystem audit, Plaza was created to extract and centralize the generic, reusable MCP tools previously embedded in `meridian-prime`. It serves as the definitive, standalone platform for all foundational agent tooling.
 
 ## Key Features
 
 | Feature | Description |
 | :--- | :--- |
-| **Universal Scraper** | Robust web scraper handling both HTML and in-transit PDFs |
-| **Browser Automation** | Production-grade Playwright integration for complex web interactions |
-| **Web Search** | Unified interface to multiple search providers (Exa, Serper, Perplexity) |
-| **Data Enrichment** | LinkedIn data scraping and other data enrichment services |
-| **Intelligence Search** | Intent detection and cross-referencing capabilities |
+| **MCP Tooling** | Provides a suite of generic, domain-agnostic tools for AI agents |
+| **Extracted from `meridian-prime`** | Formalizes and centralizes the core tooling from the legacy system |
+| **Standalone Service** | A dedicated platform for all foundational agent tooling |
 
 ## Quick Start
 
 ```bash
 # Install dependencies
-npm install
+pip install -r requirements.txt
 
-# Build the project
-npm run build
-
-# Run in development mode
-npm run dev
+# Run the server
+python -m src.main
 
 # Run tests
-npm run test
+pytest
 ```
 
 ## Architecture
 
-Plaza is designed as a collection of MCP-compatible microservices:
+Plaza is a headless Python service built on FastAPI.
 
-- Each tool is exposed as an MCP service
-- Unified configuration and authentication
-- Extensible plugin architecture
-- Docker containerized for easy deployment
+- **API:** MCP (Model Context Protocol)
+- **Authentication:** Delegates to Zitadel via the Aegis SDK
 
 ## Ecosystem Context
 
-Plaza is part of the NizamIQ Masterplan. For strategic context, see:
+Plaza is a core component of the NizamIQ Masterplan. For strategic context, see:
 - [nizamiq-strategy](https://github.com/nizamiq/nizamiq-strategy)
 - [Ecosystem Architecture](https://github.com/nizamiq/nizamiq-strategy/blob/main/03_technical/ecosystem_architecture.md)
 
@@ -69,7 +62,7 @@ Plaza is part of the NizamIQ Masterplan. For strategic context, see:
 
 ## License
 
-[To be determined - this is a licensable product]
+[To be determined]
 
 ## Status
 
@@ -78,4 +71,4 @@ Plaza is part of the NizamIQ Masterplan. For strategic context, see:
 
 ---
 
-*Plaza - Empowering agents to interact with the digital world.*
+*Plaza - The foundational tooling platform for the NizamIQ ecosystem.*
