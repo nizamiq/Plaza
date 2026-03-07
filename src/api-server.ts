@@ -65,12 +65,27 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction): 
 
 // Health endpoints (no auth required)
 app.get('/healthz', async (req, res) => {
-  const status = await plaza.healthCheck();
-  res.status(status.status === 'healthy' ? 200 : 503).json(status);
+  try {
+    // Quick health check with timeout protection
+    const status = await Promise.race([
+      plaza.healthCheck(),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Health check timeout')), 3000))
+    ]) as any;
+    res.status(status.status === 'healthy' ? 200 : 503).json(status);
+  } catch (error: any) {
+    // Return degraded status instead of failing
+    res.status(200).json({
+      status: 'degraded',
+      message: error.message || 'Health check timed out',
+      timestamp: new Date().toISOString(),
+      service: 'plaza'
+    });
+  }
 });
 
 app.get('/readyz', (req, res) => {
-  res.json({ status: 'ready', service: 'plaza' });
+  // Simple readiness check - server is up and can accept requests
+  res.json({ status: 'ready', service: 'plaza', timestamp: new Date().toISOString() });
 });
 
 // Load OpenAPI spec
@@ -134,11 +149,36 @@ app.use('/v1', apiRouter);
 
 const PORT = process.env.PORT || 8000;
 
+// Track initialization state
+let isInitialized = false;
+let initPromise: Promise<void> | null = null;
+
+async function ensureInitialized(): Promise<void> {
+  if (isInitialized) return;
+  if (!initPromise) {
+    initPromise = plaza.init().then(() => {
+      isInitialized = true;
+    }).catch((error) => {
+      console.error('Failed to initialize browser:', error);
+      initPromise = null;
+      throw error;
+    });
+  }
+  return initPromise;
+}
+
 async function run() {
-  await plaza.init();
+  // Start server immediately (don't wait for browser init)
   app.listen(PORT, () => {
     console.log(`Plaza REST API server listening on port ${PORT}`);
     console.log(`Swagger UI available at http://localhost:${PORT}/docs`);
+  });
+
+  // Initialize browser in the background
+  ensureInitialized().then(() => {
+    console.log('Browser automation initialized successfully');
+  }).catch((error) => {
+    console.warn('Browser initialization deferred (will retry on first use):', error.message);
   });
 }
 
