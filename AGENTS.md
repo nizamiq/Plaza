@@ -24,15 +24,13 @@ version: 1.0.0
 >
 > **If a repository is not listed as `in_scope` or `incubating` in `ECOSYSTEM.json`, do not perform any work on it.** Treat it as out of scope by default.
 >
-> **Active in-scope repositories:** `nizamiq-strategy`, `nizamiq.com`, `nizamiq-methodology`, `anchorlink`, `meridian`, `Fireside`, `Cornerstone`, `Plinth`, `Recce`, `Atlas`, `Aegis`, `gateway-config`, `documentation-standard`
->
-> **Incubating repositories (governance setup only, no phase execution without operator authorization):** `autonomous-product-studio`, `Axiom`
->
-> **Reference only (read-only, no modifications):** `nizamiq-website`, `meridian-prime`
->
-> **Explicitly out of scope:** `sputnik-gateway` and any repository not listed above.
+> **Active in-scope repositories:** `nizamiq-strategy`, `nizamiq.com`, `nizamiq-methodology`, `anchorlink`, `meridian`, `Fireside`, `Cornerstone`, `KubeClaw`, `Recce`, `Atlas`, `Aegis`, `gateway-config`, `documentation-standard`, `zitadel-config`, `Plaza`, `Canon`, `Charter`, `apex`, `tracer`, `Arnold`, `playbooks`
 
----
+**Incubating:** `autonomous-product-studio`, `Axiom`
+
+**Reference only (read-only):** `nizamiq-website`, `meridian-prime`
+
+**Explicitly out of scope:** `sputnik-gateway` and any repository not listed above.
 
 ## Agent Entry Point
 
