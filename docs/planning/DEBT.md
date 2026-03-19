@@ -3,8 +3,8 @@ id: plaza-debt-v2
 title: "Plaza: Technical Debt & Porting Backlog"
 description: "Tracking documentation gaps, implementation debt, and the formal porting backlog from meridian-prime."
 tags: [debt, plaza, tracking, planning, backlog]
-status: ACTIVE
-last_audited: "2026-02-24"
+status: IN_REVIEW
+last_audited: "2026-03-19"
 authoritative_source: "docs/planning/DEBT.md"
 version: 2.0.0
 ---
@@ -38,5 +38,5 @@ The primary source of work for Plaza is the systematic porting and productionizi
 
 | Version | Date | Author | Changes |
 | :--- | :--- | :--- | :--- |
-| 2.0.0 | 2026-02-24 | Manus AI | Overhauled document. Added the formal porting backlog from `meridian-prime`. |
+| 2.0.0 | 2026-02-24 | NizamIQ | Overhauled document. Added the formal porting backlog from `meridian-prime`. |
 | 1.0.0 | 2026-02-23 | Execution Engine Agent | Initial creation. |
