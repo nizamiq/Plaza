@@ -9,6 +9,19 @@ authoritative_source: "AGENTS.md"
 version: 1.0.0
 ---
 
+## Quick-Start Checklist
+
+Before taking any action in this repository, complete the following steps in order:
+
+1. **Verify scope** — Confirm this repo is listed as `in-scope` in [SCOPE.md](https://github.com/nizamiq/nizamiq-strategy/blob/main/SCOPE.md) and [ECOSYSTEM.json](https://github.com/nizamiq/nizamiq-strategy/blob/main/ECOSYSTEM.json).
+2. **Read CONTEXT.md** — Understand the system architecture, dependency map, execution commands, and explicit out-of-scope boundaries before writing any code.
+3. **Check the manifest** — Open `docs/planning/manifest.json`. Identify the current phase and read the active phase YAML before proposing any work.
+4. **Review DEBT.md** — Open `docs/planning/DEBT.md` (if present). Do not introduce changes that conflict with known debt or workarounds.
+5. **Branch correctly** — Create a branch: `phase/<id>-<description>`, `fix/<description>`, or `chore/<description>`. Never commit directly to `main`.
+6. **Open a PR** — When the phase or task is complete, open a Pull Request against `main`. Do not self-merge.
+7. **Resolve CodeRabbit** — All CodeRabbit findings must be resolved before the PR is eligible for merge.
+
+
 # Plaza: AI Agent Guidelines
 
 ---
@@ -24,15 +37,13 @@ version: 1.0.0
 >
 > **If a repository is not listed as `in_scope` or `incubating` in `ECOSYSTEM.json`, do not perform any work on it.** Treat it as out of scope by default.
 >
-> **Active in-scope repositories:** `nizamiq-strategy`, `nizamiq.com`, `nizamiq-methodology`, `anchorlink`, `meridian`, `Fireside`, `Cornerstone`, `Plinth`, `Recce`, `Atlas`, `Aegis`, `gateway-config`, `documentation-standard`
->
-> **Incubating repositories (governance setup only, no phase execution without operator authorization):** `autonomous-product-studio`, `Axiom`
->
-> **Reference only (read-only, no modifications):** `nizamiq-website`, `meridian-prime`
->
-> **Explicitly out of scope:** `sputnik-gateway` and any repository not listed above.
+> **Active in-scope repositories:** `nizamiq-strategy`, `nizamiq.com`, `nizamiq-methodology`, `anchorlink`, `meridian`, `Fireside`, `Cornerstone`, `KubeClaw`, `Recce`, `Atlas`, `Aegis`, `gateway-config`, `documentation-standard`, `zitadel-config`, `Plaza`, `Canon`, `Charter`, `apex`, `tracer`, `Arnold`, `playbooks`
 
----
+**Incubating:** `Axiom`
+
+**Reference only (read-only):** `nizamiq-website`, `meridian-prime`
+
+**Explicitly out of scope:** `sputnik-gateway` and any repository not listed above.
 
 ## MANDATORY FIRST ACTION: AGIP Bootstrap
 
@@ -101,3 +112,19 @@ This project uses the NizamIQ Planning Framework:
 | Version | Date | Author | Changes |
 | :--- | :--- | :--- | :--- |
 | 1.0.0 | 2026-02-23 | Execution Engine Agent | Initial creation |
+
+---
+
+## ⚠️ Git Workflow — PR Mandate
+
+- **Agents MUST open a Pull Request against `main` for every completed phase.** Direct pushes to `main` are not permitted.
+- Branch naming: `phase/<phase-id>-<short-description>`, `fix/<short-description>`, or `chore/<short-description>`.
+- The PR description must reference the completed phase YAML and summarise what was delivered.
+- Do not merge your own PR — leave it open for human operator review and approval.
+
+## ⚠️ Code Review Gate — CodeRabbit
+
+- All CodeRabbit review findings **must be resolved** before a PR is eligible for merge.
+- CodeRabbit is configured with `request_changes_workflow: true` — unresolved findings block merge via GitHub's Request Changes mechanism.
+- All PR conversations must be marked resolved (`required_conversation_resolution` is enforced on `main` in branch protection).
+- Do not dismiss or bypass CodeRabbit reviews without addressing the underlying finding.

@@ -87,3 +87,12 @@ With the core services ported and integrated, the immediate focus is on packagin
 -   **Define Licensing Model:** Formalize the licensing terms for both internal and external use.
 
 See the [planning manifest](./docs/planning/manifest.json) and [Phase 03 plan](./docs/planning/phases/phase_03_packaging.yaml) for details.
+
+## Out of Scope
+
+The following are explicit boundaries for this repository. Agents must not implement, refactor, or propose work in these areas without explicit operator authorisation:
+
+- No business logic in MCP tools — thin delegation layer only; tools must delegate to authoritative services
+- No direct database access — all data access goes through service APIs
+- No authentication implementation — delegate to Aegis SDK
+- No AI model calls — tool execution only; inference is Tracer's responsibility
