@@ -34,9 +34,17 @@ The primary source of work for Plaza is the systematic porting and productionizi
 | **PLAZA-DEBT-001** | **Missing Architecture Docs:** The `docs/architecture` directory is empty. | Create `system_architecture.md`, `component_diagrams.md`, and `data_flow.md` as planned. | `PENDING` |
 | **PLAZA-DEBT-002** | **Missing API Docs:** The `docs/api` directory is empty and the OpenAPI spec is incomplete. | Create `mcp_protocol.md` and `service_interfaces.md`. Auto-generate OpenAPI spec from code. | `PENDING` |
 
+## P2: Planning Manifest Debt
+
+| ID | Description | Resolution | Status |
+| :--- | :--- | :--- | :--- |
+| ~~**PLAZA-DEBT-003**~~ | ~~**Missing manifest phase fields**~~ | **RESOLVED 2026-03-20**: Truth established from first principles — 4 phase files (00–03) confirmed. Phases 00/01/02 have top-level `status: COMPLETE` in YAML. Phase 03 has all steps `status: COMPLETE`. Manifest `status` and `phase_status` both `"COMPLETE"`. Set `total_phases: 4`, `completed_phases: ["00","01","02","03"]`, `current_phase: "COMPLETE"`. | RESOLVED |
+
 ## Change Log
 
 | Version | Date | Author | Changes |
 | :--- | :--- | :--- | :--- |
+| 2.2.0 | 2026-03-20 | Remediation Agent | RESOLVED PLAZA-DEBT-003: first-principles audit confirmed 4 phase files (00–03) all COMPLETE. Set total_phases:4, completed_phases:[00-03], current_phase:COMPLETE. |
+| 2.1.0 | 2026-03-20 | Remediation Agent | Added PLAZA-DEBT-003: missing manifest phase fields, operator input required. |
 | 2.0.0 | 2026-02-24 | NizamIQ | Overhauled document. Added the formal porting backlog from `meridian-prime`. |
 | 1.0.0 | 2026-02-23 | Execution Engine Agent | Initial creation. |
