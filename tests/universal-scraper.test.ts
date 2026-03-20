@@ -13,21 +13,7 @@ describe('UniversalScraper', () => {
     vi.restoreAllMocks();
   });
 
-  describe('constructor', () => {
-    it('should create instance with default options', () => {
-      expect(scraper).toBeDefined();
-    });
-
-    it('should create instance with custom options', () => {
-      const customScraper = new UniversalScraper({
-        timeout: 5000,
-        userAgent: 'CustomBot/1.0',
-      });
-      expect(customScraper).toBeDefined();
-    });
-  });
-
-  describe('scrape', () => {
+  describe('URL validation', () => {
     it('should throw ScraperError for invalid URL', async () => {
       await expect(scraper.scrape('not-a-valid-url')).rejects.toThrow(ScraperError);
     });
@@ -39,6 +25,148 @@ describe('UniversalScraper', () => {
     it('should throw ScraperError for empty URL', async () => {
       await expect(scraper.scrape('')).rejects.toThrow(ScraperError);
     });
+
+    it('should throw ScraperError for javascript: protocol', async () => {
+      await expect(scraper.scrape('javascript:alert(1)')).rejects.toThrow(ScraperError);
+    });
+
+    it('should throw ScraperError for data: protocol', async () => {
+      await expect(scraper.scrape('data:text/html,<h1>Test</h1>')).rejects.toThrow(ScraperError);
+    });
+  });
+
+  describe('HTTP scraping', () => {
+    it('should scrape HTML content from URL', async () => {
+      const result = await scraper.scrape('https://httpbin.org/html');
+      expect(result).toBeDefined();
+      expect(result.url).toBe('https://httpbin.org/html');
+      expect(result.content).toBeDefined();
+      expect(result.contentType).toContain('text/html');
+    });
+
+    it('should extract text content from HTML', async () => {
+      const result = await scraper.scrape('https://httpbin.org/html');
+      expect(result.textContent).toBeDefined();
+      expect(typeof result.textContent).toBe('string');
+      expect(result.textContent.length).toBeGreaterThan(0);
+    });
+
+    it('should extract title from HTML', async () => {
+      const result = await scraper.scrape('https://httpbin.org/html');
+      expect(result.title).toBeDefined();
+      expect(typeof result.title).toBe('string');
+    });
+
+    it('should extract links from HTML', async () => {
+      const result = await scraper.scrape('https://httpbin.org/html');
+      expect(result.links).toBeDefined();
+      expect(Array.isArray(result.links)).toBe(true);
+    });
+
+    it('should respect timeout option', async () => {
+      const scraperWithTimeout = new UniversalScraper({ timeout: 100 });
+      await expect(
+        scraperWithTimeout.scrape('https://httpbin.org/delay/5')
+      ).rejects.toThrow(ScraperError);
+    });
+
+    it('should follow redirects', async () => {
+      const result = await scraper.scrape('https://httpbin.org/redirect/1');
+      expect(result).toBeDefined();
+      expect(result.statusCode).toBe(200);
+    });
+
+    it('should handle 404 errors', async () => {
+      await expect(
+        scraper.scrape('https://httpbin.org/status/404')
+      ).rejects.toThrow(ScraperError);
+    });
+
+    it('should handle 500 errors', async () => {
+      await expect(
+        scraper.scrape('https://httpbin.org/status/500')
+      ).rejects.toThrow(ScraperError);
+    });
+  });
+
+  describe('content type handling', () => {
+    it('should handle JSON responses', async () => {
+      const result = await scraper.scrape('https://httpbin.org/json');
+      expect(result).toBeDefined();
+      expect(result.contentType).toContain('application/json');
+    });
+
+    it('should handle XML responses', async () => {
+      const result = await scraper.scrape('https://httpbin.org/xml');
+      expect(result).toBeDefined();
+      expect(result.contentType).toContain('application/xml');
+    });
+
+    it('should handle raw content when requested', async () => {
+      const result = await scraper.scrape('https://httpbin.org/html', { raw: true });
+      expect(result).toBeDefined();
+      expect(result.rawContent).toBeDefined();
+    });
+  });
+
+  describe('custom headers', () => {
+    it('should send custom User-Agent', async () => {
+      const customScraper = new UniversalScraper({
+        userAgent: 'TestBot/1.0'
+      });
+      const result = await customScraper.scrape('https://httpbin.org/user-agent');
+      expect(result.content).toContain('TestBot/1.0');
+    });
+
+    it('should send custom headers', async () => {
+      const customScraper = new UniversalScraper({
+        headers: { 'X-Custom-Header': 'test-value' }
+      });
+      const result = await customScraper.scrape('https://httpbin.org/headers');
+      expect(result.content).toContain('X-Custom-Header');
+      expect(result.content).toContain('test-value');
+    });
+  });
+
+  describe('retry logic', () => {
+    it('should retry on transient failures', async () => {
+      // Mock axios to fail once then succeed
+      const mockAxios = vi.fn()
+        .mockRejectedValueOnce({ response: { status: 503 } })
+        .mockResolvedValueOnce({
+          data: '<html><body>Test</body></html>',
+          headers: { 'content-type': 'text/html' },
+          status: 200,
+        });
+      
+      vi.spyOn(scraper as any, 'fetchWithAxios').mockImplementation(mockAxios);
+      
+      const result = await scraper.scrape('https://example.com');
+      expect(result).toBeDefined();
+      expect(mockAxios).toHaveBeenCalledTimes(2);
+    });
+  });
+
+  describe('encoding handling', () => {
+    it('should handle UTF-8 content', async () => {
+      const result = await scraper.scrape('https://httpbin.org/encoding/utf8');
+      expect(result).toBeDefined();
+      expect(result.content).toBeDefined();
+    });
+  });
+
+  describe('metadata extraction', () => {
+    it('should extract metadata from HTML', async () => {
+      const result = await scraper.scrape('https://httpbin.org/html');
+      expect(result.metadata).toBeDefined();
+      expect(result.metadata.timestamp).toBeDefined();
+      expect(result.metadata.source).toBe('https://httpbin.org/html');
+    });
+
+    it('should include status code in result', async () => {
+      const result = await scraper.scrape('https://httpbin.org/html');
+      expect(result.statusCode).toBe(200);
+    });
   });
 
   describe('error handling', () => {
@@ -48,6 +176,30 @@ describe('UniversalScraper', () => {
       expect(error.code).toBe('TEST_CODE');
       expect(error.statusCode).toBe(400);
       expect(error.isRetryable).toBe(true);
+    });
+
+    it('should include URL in error context', async () => {
+      const testUrl = 'https://httpbin.org/status/404';
+      try {
+        await scraper.scrape(testUrl);
+        expect.fail('Should have thrown');
+      } catch (error) {
+        expect(error).toBeInstanceOf(ScraperError);
+        expect((error as ScraperError).message).toContain('404');
+      }
+    });
+
+    it('should handle network errors', async () => {
+      await expect(
+        scraper.scrape('https://invalid-domain-that-does-not-exist-12345.com')
+      ).rejects.toThrow(ScraperError);
+    });
+
+    it('should handle timeout errors', async () => {
+      const slowScraper = new UniversalScraper({ timeout: 1 });
+      await expect(
+        slowScraper.scrape('https://httpbin.org/delay/10')
+      ).rejects.toThrow(ScraperError);
     });
   });
 });

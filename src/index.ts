@@ -99,23 +99,28 @@ export class Plaza {
   }
 
   private registerHealthChecks(): void {
-    // Scraper health check
+    // Scraper health check - actually test HTTP fetching
     this.health.registerCheck('scraper', async () => {
       try {
-        // Simple check - verify scraper can be instantiated
-        return { status: 'healthy', message: 'Scraper ready', lastChecked: new Date().toISOString() };
+        // Test scraping a reliable health check endpoint
+        await this.scraper.scrape('https://httpbin.org/get', { timeout: 5000 });
+        return { status: 'healthy', message: 'Scraper operational - HTTP fetch successful', lastChecked: new Date().toISOString() };
       } catch (error) {
-        return { status: 'unhealthy', message: (error as Error).message, lastChecked: new Date().toISOString() };
+        return { status: 'unhealthy', message: `Scraper failed: ${(error as Error).message}`, lastChecked: new Date().toISOString() };
       }
     });
 
-    // Browser health check
+    // Browser health check - actually test browser launch
     this.health.registerCheck('browser', async () => {
       try {
-        // Simple check - browser context available
-        return { status: 'healthy', message: 'Browser ready', lastChecked: new Date().toISOString() };
+        // Test browser by navigating to a simple page
+        const page = await this.browser.navigate('about:blank');
+        if (page) {
+          return { status: 'healthy', message: 'Browser operational - Chromium launch successful', lastChecked: new Date().toISOString() };
+        }
+        return { status: 'unhealthy', message: 'Browser failed to navigate', lastChecked: new Date().toISOString() };
       } catch (error) {
-        return { status: 'unhealthy', message: (error as Error).message, lastChecked: new Date().toISOString() };
+        return { status: 'unhealthy', message: `Browser failed: ${(error as Error).message}`, lastChecked: new Date().toISOString() };
       }
     });
 

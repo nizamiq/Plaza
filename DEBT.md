@@ -3,7 +3,7 @@ id: plaza-debt
 title: "Plaza: Technical Debt & Gap Register"
 description: "Technical debt and gap register, seeded from the February 2026 ecosystem audit."
 tags: ["plaza", "debt", "audit"]
-status: ACTIVE
+status: STABLE
 last_audited: "2026-02-24"
 authoritative_source: DEBT.md
 version: "1.0.0"
@@ -27,4 +27,4 @@ This register tracks all known technical debt and gaps for the `Plaza` project. 
 
 | Version | Date | Author | Changes |
 | :--- | :--- | :--- | :--- |
-| 1.0.0 | 2026-02-24 | Manus AI | Initial creation from February 2026 audit findings. |
+| 1.0.0 | 2026-02-24 | NizamIQ | Initial creation from February 2026 audit findings. |

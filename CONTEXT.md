@@ -3,8 +3,8 @@ id: plaza-context-v2
 title: "Plaza: AI Agent Context"
 description: "Primary entry point for AI agents working on the Plaza MCP Tooling Platform. This version reflects the formal porting plan from meridian-prime."
 tags: [context, plaza, mcp, agents]
-status: ACTIVE
-last_audited: "2026-02-24"
+status: STABLE
+last_audited: "2026-03-05"
 authoritative_source: "CONTEXT.md"
 version: 2.0.0
 ---

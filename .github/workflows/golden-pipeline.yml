@@ -1,5 +1,5 @@
 name: "Nizamiq Golden Pipeline - Plaza"
-# Authoritative standard: nizamiq-strategy/docs/governance/ci_cd_standards.md
+# Authoritative standard: documentation-standard/templates/governance/ci_cd_standards.md
 
 on:
   push:

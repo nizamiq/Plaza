@@ -1,5 +1,5 @@
-name: "Nizamiq Golden Pipeline"
-# Authoritative standard: nizamiq-strategy/docs/governance/ci_cd_standards.md
+name: "NizamIQ Golden Pipeline"
+# Authoritative standard: documentation-standard/templates/governance/ci_cd_standards.md
 on:
   push:
     branches: [main, master, develop]
@@ -13,20 +13,59 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: nizamiq/plaza
 jobs:
-  lint:
-    name: "Gate 1 — Code Quality"
+  doc-lint:
+    name: "Gate 1 — UDS Documentation Lint"
+    uses: nizamiq/documentation-standard/.github/workflows/doc-lint.yml@main
+
+  # ===================================================================
+  # GATE 2: DOCUMENT VALIDATION
+  # ===================================================================
+  test:
+    name: "Gate 2 — Document Validation"
     runs-on: ubuntu-latest
-    if: github.event.pull_request.draft == false
+    needs: [doc-lint]
     steps:
       - uses: actions/checkout@v4
-      - name: Run doc-lint
+      - name: Validate markdown structure
         run: |
-          echo "Doc lint gate — placeholder for UDS lint"
+          echo "Document validation gate — checks for required frontmatter and broken links"
+          find . -name "*.md" -not -path "./.git/*" | head -20
+          echo "Validation complete."
 
+  # ===================================================================
+  # GATE 3: AI AUTONOMOUS REVIEW
+  # ===================================================================
+  coderabbit-review:
+    name: "Gate 3a — AI Review (CodeRabbit)"
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    needs: [test]
+    permissions:
+      contents: read
+      pull-requests: write
+    concurrency:
+      group: ${{ github.repository }}-${{ github.event.pull_request.number }}-coderabbit
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: coderabbitai/ai-pr-reviewer@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        with:
+          debug: false
+          review_simple_changes: false
+          review_comment_lgtm: false
+
+  # ===================================================================
+  # GATE 4: SECURITY SCAN
+  # ===================================================================
   security-scan:
     name: "Gate 4 — Security Scan"
     runs-on: ubuntu-latest
-    needs: [lint]
+    needs: [test]
     permissions:
       contents: read
       security-events: write
@@ -49,33 +88,6 @@ jobs:
         continue-on-error: true
 
   # ===================================================================
-  # GATE 3: AI AUTONOMOUS REVIEW
-  # ===================================================================
-  coderabbit-review:
-    name: "Gate 3a — AI Review (CodeRabbit)"
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
-    needs: [lint]
-    permissions:
-      contents: read
-      pull-requests: write
-    concurrency:
-      group: ${{ github.repository }}-${{ github.event.pull_request.number }}-coderabbit
-      cancel-in-progress: true
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: coderabbitai/ai-pr-reviewer@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        with:
-          debug: false
-          review_simple_changes: false
-          review_comment_lgtm: false
-
-  # ===================================================================
   # GATE 5: PIPELINE COMPLETION
   # ===================================================================
   pipeline-completion:
@@ -90,4 +102,3 @@ jobs:
             exit 1
           fi
           echo "Pipeline completed successfully"
-

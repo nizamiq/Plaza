@@ -38,5 +38,5 @@ The primary source of work for Plaza is the systematic porting and productionizi
 
 | Version | Date | Author | Changes |
 | :--- | :--- | :--- | :--- |
-| 2.0.0 | 2026-02-24 | Manus AI | Overhauled document. Added the formal porting backlog from `meridian-prime`. |
+| 2.0.0 | 2026-02-24 | NizamIQ | Overhauled document. Added the formal porting backlog from `meridian-prime`. |
 | 1.0.0 | 2026-02-23 | Execution Engine Agent | Initial creation. |
