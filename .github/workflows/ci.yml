@@ -56,7 +56,7 @@ jobs:
         run: npm test -- --coverage || npm test || echo "Tests need setup"
       
       - name: Upload coverage
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage/lcov.info
