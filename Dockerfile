@@ -2,7 +2,7 @@
 # Supports both amd64 and arm64 architectures
 
 # Stage 1: Dependencies
-FROM node:20-alpine AS deps
+FROM node:25-alpine AS deps
 WORKDIR /app
 
 # Install build dependencies for native modules
@@ -13,7 +13,7 @@ COPY package.json package-lock.json* ./
 RUN npm ci --only=production
 
 # Stage 2: Builder
-FROM node:20-alpine AS builder
+FROM node:25-alpine AS builder
 WORKDIR /app
 
 # Install build dependencies
