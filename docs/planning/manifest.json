@@ -1,20 +1,26 @@
 {
   "project_name": "Plaza",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "role": "MCP Tooling Platform",
   "description": "MCP (Model Context Protocol) Tooling Platform providing generic, domain-agnostic agentic tools. Includes universal scraper, browser automation (Playwright), web search, and data enrichment services. Extracted from meridian-prime during Feb 2026 audit.",
   "layer": "L3: Tooling Platform",
+  "planning_schema_version": "2.0.0",
   "ecosystem_context": {
     "master_strategy_repo": "nizamiq-strategy",
     "architecture_doc": "nizamiq-strategy/03_technical/ecosystem_architecture.md",
     "project_definition": "nizamiq-strategy/03_technical/projects/Plaza/overview.md",
     "canonical_scope": "../scope.yaml",
     "note": "Plaza supersedes Cornerstone-MCP and Forum naming as of 2026-02-23",
-    "last_strategy_sync": "2026-02-24"
+    "last_strategy_sync": "2026-03-20"
   },
-  "status": "COMPLETE",
-  "phase_status": "COMPLETE",
-  "last_updated": "2026-03-04",
+  "status": "COMPLETED",
+  "phase_status": {
+    "00": "COMPLETED",
+    "01": "COMPLETED",
+    "02": "COMPLETED",
+    "03": "COMPLETED"
+  },
+  "last_updated": "2026-03-20",
   "last_updated_by": "NizamIQ",
   "source_files_created": 27,
   "test_files_created": 6,
@@ -26,5 +32,5 @@
     "02",
     "03"
   ],
-  "current_phase": "COMPLETE"
+  "current_phase": "COMPLETED"
 }

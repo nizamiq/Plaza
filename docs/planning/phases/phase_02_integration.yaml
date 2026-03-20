@@ -1,55 +1,80 @@
+---
 id: phase_02_integration
 title: "Phase 02: Ecosystem Integration"
 description: "Integrate Plaza services with the NizamIQ ecosystem: Aegis governance, Recce agents, and meridian platform."
-status: COMPLETE
-completed_at: "2026-02-24"
+last_audited: "2026-03-20"
+status: COMPLETED
+authoritative_source: "nizamiq-strategy/03_technical/projects/Plaza/overview.md"
+version: "2.0.0"
+tags: ["plaza", "aegis", "zitadel", "recce", "integration"]
+---
 
-tasks:
-  - id: T02.1
-    title: "Integrate with Aegis governance"
-    description: "Implement Aegis SDK integration for authorization, audit logging, and policy enforcement across all Plaza services."
-    verification: "All service calls are authorized and logged via Aegis"
-    status: COMPLETE
-    proof_of_work: "src/shared/aegis-client.ts created with auth/validation methods. Integrated in api-server.ts."
-
-  - id: T02.2
-    title: "Integrate with Recce research agent"
-    description: "Configure Plaza as the tool provider for Recce agent. Ensure seamless tool invocation and result handling."
-    verification: "Recce can successfully invoke all Plaza tools"
-    status: COMPLETE
-    proof_of_work: "src/mcp-server.ts implemented using @modelcontextprotocol/sdk exposing scraping and searching."
-
-  - id: T02.3
-    title: "Integrate with meridian platform"
-    description: "Enable Plaza services for meridian's research automation and intelligence gathering workflows."
-    verification: "Meridian workflows use Plaza tools for web interactions"
-    status: COMPLETE
-    proof_of_work: "MCP server and REST API server implemented, providing multiple interfaces."
-
-  - id: T02.4
-    title: "Implement Zitadel authentication"
-    description: "Configure OIDC authentication via Zitadel for all Plaza services. Support service-to-service authentication."
-    verification: "All services authenticate requests via Zitadel tokens"
-    status: COMPLETE
-    proof_of_work: "Token validation added in src/api-server.ts using Aegis proxy to Zitadel."
-
-  - id: T02.5
-    title: "Create API documentation"
-    description: "Document all service APIs using OpenAPI 3.0 specification. Include authentication, error responses, and examples."
-    verification: "Complete OpenAPI specs available for all services"
-    status: COMPLETE
-    proof_of_work: "docs/openapi.yaml created, swagger-ui-express integrated in api-server.ts."
-
+phase_id: "02"
+name: "Ecosystem Integration"
 dependencies:
-  - Phase 01 completion
-  - Aegis SDK available
-  - Zitadel configured
+  - phase: "01"
+    status: COMPLETED
+ecosystem_dependencies:
+  - project: "Aegis"
+    reason: "SDK required for authorization and audit logging"
+    status: AVAILABLE
+  - project: "zitadel-config"
+    reason: "Zitadel OIDC configured for service-to-service auth"
+    status: AVAILABLE
 
-completion_criteria:
-  - "Aegis governance integrated and enforced"
-  - "Recce agent can invoke all tools via MCP server"
-  - "Meridian workflows operational via REST or MCP"
-  - "Zitadel authentication configured in REST API"
-  - "API documentation complete and served via /docs"
+steps:
+  - id: "02.1"
+    title: "Integrate with Aegis governance"
+    status: COMPLETED
+    description: "Implement Aegis SDK integration for authorization, audit logging, and policy enforcement across all Plaza services."
+    verification_method: "All service calls are authorized and logged via Aegis."
+    proof_of_work: "src/shared/aegis-client.ts created with auth/validation methods. Integrated in api-server.ts."
+    docs_updated: true
+    changelog_entry: "Aegis SDK integrated for governance across Plaza services."
 
-estimated_duration: "2-3 weeks"
+  - id: "02.2"
+    title: "Integrate with Recce research agent"
+    status: COMPLETED
+    description: "Configure Plaza as the tool provider for Recce agent. Ensure seamless tool invocation and result handling via MCP server."
+    verification_method: "Recce can successfully invoke all Plaza tools via MCP protocol."
+    proof_of_work: "src/mcp-server.ts implemented using @modelcontextprotocol/sdk exposing scraping and searching tools."
+    docs_updated: true
+    changelog_entry: "MCP server implemented exposing Plaza tools to Recce."
+
+  - id: "02.3"
+    title: "Integrate with meridian platform"
+    status: COMPLETED
+    description: "Enable Plaza services for meridian's research automation and intelligence gathering workflows."
+    verification_method: "Meridian workflows use Plaza tools for web interactions via REST or MCP."
+    proof_of_work: "MCP server and REST API server both implemented, providing dual-interface access."
+    docs_updated: true
+    changelog_entry: "Plaza dual-interface (MCP + REST) available for meridian."
+
+  - id: "02.4"
+    title: "Implement Zitadel authentication"
+    status: COMPLETED
+    description: "Configure OIDC authentication via Zitadel for all Plaza services. Support service-to-service authentication."
+    verification_method: "All services authenticate requests via Zitadel tokens."
+    proof_of_work: "Token validation added in src/api-server.ts using Aegis proxy to Zitadel."
+    docs_updated: true
+    changelog_entry: "Zitadel OIDC token validation implemented in REST API."
+
+  - id: "02.5"
+    title: "Create API documentation"
+    status: COMPLETED
+    description: "Document all service APIs using OpenAPI 3.0 specification. Include authentication, error responses, and examples."
+    verification_method: "Complete OpenAPI specs available and served via /docs endpoint."
+    proof_of_work: "docs/openapi.yaml created; swagger-ui-express integrated in api-server.ts serving /docs."
+    docs_updated: true
+    changelog_entry: "OpenAPI 3.0 specification created and served via /docs."
+
+quality_controls:
+  - control: "Aegis client present"
+    check_command: "ls Plaza/src/shared/aegis-client.ts"
+    expected_result: "File exists"
+  - control: "MCP server present"
+    check_command: "ls Plaza/src/mcp-server.ts"
+    expected_result: "File exists"
+  - control: "OpenAPI spec present"
+    check_command: "ls Plaza/docs/openapi.yaml"
+    expected_result: "File exists"

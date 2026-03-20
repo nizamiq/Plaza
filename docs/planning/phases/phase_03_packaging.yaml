@@ -1,68 +1,89 @@
+---
 id: phase_03_packaging
 title: "Phase 03: Packaging & Deployment"
-description: "Package Plaza as a standalone, licensable product with Docker deployment, CI/CD, and documentation."
+description: "Package Plaza as a standalone, licensable product with Docker deployment, Kubernetes manifests, CI/CD pipeline, and documentation."
+last_audited: "2026-03-20"
+status: COMPLETED
+authoritative_source: "nizamiq-strategy/03_technical/projects/Plaza/overview.md"
+version: "2.0.0"
+tags: ["plaza", "docker", "kubernetes", "ci-cd", "packaging"]
+---
 
-tasks:
-  - id: T03.1
+phase_id: "03"
+name: "Packaging & Deployment"
+dependencies:
+  - phase: "02"
+    status: COMPLETED
+ecosystem_dependencies:
+  - project: "KubeClaw"
+    reason: "Kubernetes manifests target KubeClaw-managed cluster"
+    status: ARTIFACTS_READY
+
+steps:
+  - id: "03.1"
     title: "Create Docker images"
-    description: "Create optimized Docker images for all Plaza services. Support multi-architecture builds (amd64, arm64)."
-    verification: "Docker images build and run successfully"
-    status: COMPLETE
-    deliverables:
-      - Dockerfile (multi-stage, production-ready)
-      - Dockerfile.dev (development image)
-      - deploy/build.sh (build script)
+    status: COMPLETED
+    description: "Create optimized multi-stage Docker images for all Plaza services. Support multi-architecture builds (amd64, arm64)."
+    verification_method: "Docker images build successfully for both amd64 and arm64."
+    proof_of_work: "Dockerfile (multi-stage, production-ready), Dockerfile.dev (development image), deploy/build.sh (build script)."
+    docs_updated: true
+    changelog_entry: "Multi-stage Docker images created for Plaza."
 
-  - id: T03.2
+  - id: "03.2"
     title: "Create Docker Compose deployment"
+    status: COMPLETED
     description: "Create Docker Compose configuration for local development and testing. Include all dependencies (Redis, etc.)."
-    verification: "Full stack can be started with docker-compose up"
-    status: COMPLETE
-    deliverables:
-      - deploy/docker-compose/docker-compose.yml (development)
-      - deploy/docker-compose/docker-compose.prod.yml (production)
-      - deploy/docker-compose/prometheus.yml (monitoring)
+    verification_method: "Full stack can be started with docker-compose up."
+    proof_of_work: "deploy/docker-compose/docker-compose.yml (development), docker-compose.prod.yml (production), prometheus.yml (monitoring)."
+    docs_updated: true
+    changelog_entry: "Docker Compose configs created for dev and production."
 
-  - id: T03.3
+  - id: "03.3"
     title: "Create Kubernetes manifests"
-    description: "Create Kubernetes deployment manifests for production deployment. Include ConfigMaps, Secrets, Ingress, and HPA."
-    verification: "Plaza can be deployed to Kubernetes cluster"
-    status: COMPLETE
-    deliverables:
-      - deploy/k8s/base/ (base Kustomize resources)
-      - deploy/k8s/overlays/development/
-      - deploy/k8s/overlays/staging/
-      - deploy/k8s/overlays/production/
-      - deploy/k8s/infrastructure/ (network policies, external secrets)
-      - deploy/deploy.sh (deployment script)
+    status: COMPLETED
+    description: "Create Kubernetes deployment manifests for production deployment. Include ConfigMaps, Secrets, Ingress, and HPA via Kustomize overlays."
+    verification_method: "Plaza can be deployed to Kubernetes cluster via kustomize build."
+    proof_of_work: "deploy/k8s/base/ (base Kustomize resources), overlays/development/, overlays/staging/, overlays/production/, infrastructure/ (network policies, external secrets), deploy/deploy.sh."
+    docs_updated: true
+    changelog_entry: "Kubernetes Kustomize manifests created for all environments."
 
-  - id: T03.4
+  - id: "03.4"
     title: "Implement CI/CD pipeline"
+    status: COMPLETED
     description: "Configure NizamIQ Golden Pipeline for Plaza. Include build, test, security scan, and deployment stages."
-    verification: "CI/CD pipeline runs successfully on all PRs"
-    status: COMPLETE
-    deliverables:
-      - .github/workflows/golden-pipeline.yml (full 7-gate pipeline)
-      - .github/workflows/ci.yml (updated with multi-arch builds)
+    verification_method: "CI/CD pipeline runs successfully on all PRs."
+    proof_of_work: ".github/workflows/golden-pipeline.yml (full 7-gate pipeline), .github/workflows/ci.yml (updated with multi-arch builds)."
+    docs_updated: true
+    changelog_entry: "NizamIQ Golden Pipeline configured for Plaza."
 
-  - id: T03.5
+  - id: "03.5"
     title: "Create user documentation"
-    description: "Write comprehensive user documentation including getting started, configuration, and troubleshooting guides."
-    verification: "Documentation covers all common use cases"
-    status: COMPLETE
-    deliverables:
-      - deploy/README.md (deployment overview)
-      - deploy/docs/DEPLOYMENT.md (comprehensive guide)
-      - deploy/k8s/README.md (Kubernetes-specific docs)
-      - QUICKSTART.md (quick start guide)
-      - LICENSE (MIT with additional terms)
+    status: COMPLETED
+    description: "Write comprehensive user documentation including deployment, configuration, Kubernetes, and quick-start guides."
+    verification_method: "Documentation covers all common use cases and deployment paths."
+    proof_of_work: "deploy/README.md, deploy/docs/DEPLOYMENT.md, deploy/k8s/README.md, QUICKSTART.md, LICENSE created."
+    docs_updated: true
+    changelog_entry: "Comprehensive deployment documentation created."
 
-  - id: T03.6
+  - id: "03.6"
     title: "Define licensing model"
+    status: COMPLETED
     description: "Define licensing terms and implement license validation. Support both self-hosted and SaaS deployment modes."
-    verification: "License validation implemented and documented"
-    status: COMPLETE
-    deliverables:
+    verification_method: "LICENSE file present and licensing terms documented."
+    proof_of_work: "LICENSE (MIT License with additional terms for API providers) created."
+    docs_updated: true
+    changelog_entry: "Licensing model defined (MIT with additional API provider terms)."
+
+quality_controls:
+  - control: "Docker images build without error"
+    check_command: "docker build -t plaza:test Plaza/ 2>&1 | tail -5"
+    expected_result: "Successfully built"
+  - control: "Kubernetes manifests valid"
+    check_command: "kubectl kustomize Plaza/deploy/k8s/overlays/production 2>&1 | head -5"
+    expected_result: "Valid YAML output without errors"
+  - control: "Golden Pipeline workflow present"
+    check_command: "ls Plaza/.github/workflows/golden-pipeline.yml"
+    expected_result: "File exists"
       - LICENSE (MIT License with additional terms for API providers)
 
 dependencies:

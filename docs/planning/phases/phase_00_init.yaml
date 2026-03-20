@@ -1,64 +1,90 @@
+---
 id: phase_00_init
 title: "Phase 00: Project Initialization"
-description: "Initialize the Plaza project structure and establish foundational governance files."
-status: COMPLETE
+description: "Initialize the Plaza project structure and establish foundational governance files per NizamIQ UDS standards."
+last_audited: "2026-03-20"
+status: COMPLETED
+authoritative_source: "nizamiq-strategy/03_technical/projects/Plaza/overview.md"
+version: "2.0.0"
+tags: ["plaza", "init", "governance", "uds"]
+---
 
-tasks:
-  - id: T00.1
+phase_id: "00"
+name: "Project Initialization"
+dependencies: []
+ecosystem_dependencies: []
+
+steps:
+  - id: "00.1"
     title: "Create Plaza repository structure"
+    status: COMPLETED
     description: "Create the complete directory structure at /home/openclaw/code/Plaza following NizamIQ UDS standards."
-    verification: "Directory structure exists and contains all required folders."
-    status: COMPLETE
-    completed_at: "2026-02-23"
+    verification_method: "Directory structure exists and contains all required folders."
+    proof_of_work: "Plaza/ root with src/, deploy/, docs/, tests/ directories created 2026-02-23."
+    docs_updated: true
+    changelog_entry: "Plaza repo initialized with UDS-compliant directory structure."
 
-  - id: T00.2
+  - id: "00.2"
     title: "Create manifest.json"
+    status: COMPLETED
     description: "Create the planning manifest with project metadata, phase map, and ecosystem context."
-    verification: "manifest.json is valid JSON and parseable."
-    status: COMPLETE
-    completed_at: "2026-02-23"
+    verification_method: "manifest.json is valid JSON and parseable."
+    proof_of_work: "Plaza/docs/planning/manifest.json created with project_name, version, role, ecosystem_context."
+    docs_updated: true
+    changelog_entry: "manifest.json initialized."
 
-  - id: T00.3
+  - id: "00.3"
     title: "Create CONTEXT.md"
+    status: COMPLETED
     description: "Create the AI agent entry point following UDS template with proper frontmatter."
-    verification: "CONTEXT.md exists with valid YAML frontmatter per UDS."
-    status: COMPLETE
-    completed_at: "2026-02-23"
+    verification_method: "CONTEXT.md exists with valid YAML frontmatter per UDS."
+    proof_of_work: "Plaza/CONTEXT.md created with role, layer, ecosystem_context frontmatter."
+    docs_updated: true
+    changelog_entry: "CONTEXT.md created per UDS template."
 
-  - id: T00.4
+  - id: "00.4"
     title: "Create README.md"
+    status: COMPLETED
     description: "Create the human-readable project overview with key features and usage."
-    verification: "README.md provides clear project description."
-    status: COMPLETE
-    completed_at: "2026-02-23"
+    verification_method: "README.md provides clear project description."
+    proof_of_work: "Plaza/README.md created with features, usage, and deployment overview."
+    docs_updated: true
+    changelog_entry: "README.md created."
 
-  - id: T00.5
+  - id: "00.5"
     title: "Create AGENTS.md"
+    status: COMPLETED
     description: "Create the agent scope check document referencing nizamiq-strategy/ECOSYSTEM.json."
-    verification: "AGENTS.md contains mandatory scope check section."
-    status: COMPLETE
-    completed_at: "2026-02-23"
+    verification_method: "AGENTS.md contains mandatory scope check section."
+    proof_of_work: "Plaza/AGENTS.md created with scope check pointing to ECOSYSTEM.json."
+    docs_updated: true
+    changelog_entry: "AGENTS.md created."
 
-  - id: T00.6
+  - id: "00.6"
     title: "Create DEBT.md"
+    status: COMPLETED
     description: "Initialize the technical debt log for tracking documentation and implementation gaps."
-    verification: "DEBT.md exists with proper structure."
-    status: COMPLETE
-    completed_at: "2026-02-23"
+    verification_method: "DEBT.md exists with proper structure."
+    proof_of_work: "Plaza/DEBT.md created with debt tracking structure."
+    docs_updated: true
+    changelog_entry: "DEBT.md initialized."
 
-  - id: T00.7
+  - id: "00.7"
     title: "Create Phase 01-03 definitions"
+    status: COMPLETED
     description: "Create phase YAML files for all remaining phases (01, 02, 03)."
-    verification: "All phase files exist with complete task definitions."
-    status: COMPLETE
-    completed_at: "2026-02-23"
+    verification_method: "All phase files exist with complete task definitions."
+    proof_of_work: "Plaza/docs/planning/phases/phase_01_core_services.yaml, phase_02_integration.yaml, phase_03_packaging.yaml created."
+    docs_updated: true
+    changelog_entry: "Phase 01-03 YAML files created."
 
-completion_criteria:
-  - criterion: "All files created per UDS standard."
-    status: COMPLETE
-  - criterion: "manifest.json is valid and parseable."
-    status: COMPLETE
-  - criterion: "CONTEXT.md follows UDS template with proper frontmatter."
+quality_controls:
+  - control: "All UDS governance files present"
+    check_command: "ls Plaza/CONTEXT.md Plaza/README.md Plaza/AGENTS.md Plaza/DEBT.md"
+    expected_result: "All 4 files listed without error"
+  - control: "manifest.json valid JSON"
+    check_command: "python3 -c \"import json; json.load(open('Plaza/docs/planning/manifest.json'))\""
+    expected_result: "No exception raised"
     status: COMPLETE
   - criterion: "AGENTS.md includes scope check pointing to ECOSYSTEM.json."
     status: COMPLETE
