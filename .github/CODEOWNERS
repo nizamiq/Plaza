@@ -1,0 +1,17 @@
+# CODEOWNERS — NizamIQ Ecosystem Standard
+# Authoritative standard: documentation-standard/templates/governance/ci_cd_standards.md
+# Update team handles to match your GitHub org teams.
+
+# Default — all files require engineering review
+*                           @nizamiq/engineering
+
+# Governance files — require governance team sign-off
+AGENTS.md                   @nizamiq/governance @nizamiq/engineering
+CONTEXT.md                  @nizamiq/governance @nizamiq/engineering
+SCOPE.md                    @nizamiq/governance @nizamiq/engineering
+DEBT.md                     @nizamiq/governance @nizamiq/engineering
+CHANGELOG.md                @nizamiq/governance @nizamiq/engineering
+opencode.json               @nizamiq/governance @nizamiq/engineering
+
+# CI/CD and repo config — require platform team sign-off
+.github/                    @nizamiq/platform @nizamiq/engineering
