@@ -96,3 +96,7 @@ The following are explicit boundaries for this repository. Agents must not imple
 - No direct database access — all data access goes through service APIs
 - No authentication implementation — delegate to Aegis SDK
 - No AI model calls — tool execution only; inference is Tracer's responsibility
+
+## Ecosystem Dependencies
+
+For the full cross-repo dependency graph, blast-radius index, and critical path analysis, see [`DEPENDENCY_MAP.md`](https://github.com/nizamiq/nizamiq-strategy/blob/main/DEPENDENCY_MAP.md).
