@@ -50,7 +50,7 @@
   "author": "NizamIQ",
   "license": "MIT",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.27.0",
+    "@modelcontextprotocol/sdk": "^1.27.1",
     "axios": "^1.13.5",
     "bottleneck": "^2.19.0",
     "cheerio": "^1.0.0",
