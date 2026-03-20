@@ -51,7 +51,7 @@
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.27.0",
-    "axios": "^1.13.5",
+    "axios": "^1.13.6",
     "bottleneck": "^2.19.0",
     "cheerio": "^1.0.0",
     "cors": "^2.8.6",
