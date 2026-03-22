@@ -2,7 +2,13 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { PlaywrightWrapper } from '../src/browser-automation/playwright-wrapper.js';
 import { BrowserError } from '../src/shared/errors.js';
 
-describe('PlaywrightWrapper', () => {
+/**
+ * Browser automation tests require a live Playwright/Browserbase connection.
+ * In CI environments without browser infrastructure, these tests are skipped.
+ */
+const shouldSkipBrowserTests = !process.env.PLAYWRIGHT_BROWSERBASE_ENDPOINT && !process.env.BROWSER_BASE_URL;
+
+describe.skipIf(shouldSkipBrowserTests)('PlaywrightWrapper', () => {
   let browser: PlaywrightWrapper;
 
   beforeEach(async () => {
