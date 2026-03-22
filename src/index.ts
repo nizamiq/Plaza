@@ -113,12 +113,13 @@ export class Plaza {
     // Browser health check - actually test browser launch
     this.health.registerCheck('browser', async () => {
       try {
-        // Test browser by navigating to a simple page
-        const page = await this.browser.navigate('about:blank');
-        if (page) {
+        // Test browser by initializing and creating a page session
+        await this.browser.init();
+        const sessionId = await this.browser.newPage('about:blank');
+        if (sessionId) {
           return { status: 'healthy', message: 'Browser operational - Chromium launch successful', lastChecked: new Date().toISOString() };
         }
-        return { status: 'unhealthy', message: 'Browser failed to navigate', lastChecked: new Date().toISOString() };
+        return { status: 'unhealthy', message: 'Browser failed to create session', lastChecked: new Date().toISOString() };
       } catch (error) {
         return { status: 'unhealthy', message: `Browser failed: ${(error as Error).message}`, lastChecked: new Date().toISOString() };
       }

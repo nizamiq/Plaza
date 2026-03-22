@@ -3,13 +3,13 @@ id: plaza-debt-v2
 title: "Plaza: Technical Debt & Porting Backlog"
 description: "Tracking documentation gaps, implementation debt, and the formal porting backlog from meridian-prime."
 tags: [debt, plaza, tracking, planning, backlog]
-status: IN_REVIEW
-last_audited: "2026-03-19"
+status: STABLE
+last_audited: "2026-03-21"
 authoritative_source: "docs/planning/DEBT.md"
-version: 2.0.0
+version: 2.1.0
 ---
 
-# Plaza: Technical Debt & Porting Backlog (v2.0)
+# Plaza: Technical Debt & Porting Backlog (v2.1)
 
 This document tracks all technical debt, documentation gaps, and the formal porting backlog for the Plaza project.
 
@@ -33,6 +33,7 @@ The primary source of work for Plaza is the systematic porting and productionizi
 | :--- | :--- | :--- | :--- |
 | **PLAZA-DEBT-001** | **Missing Architecture Docs:** The `docs/architecture` directory is empty. | Create `system_architecture.md`, `component_diagrams.md`, and `data_flow.md` as planned. | `PENDING` |
 | **PLAZA-DEBT-002** | **Missing API Docs:** The `docs/api` directory is empty and the OpenAPI spec is incomplete. | Create `mcp_protocol.md` and `service_interfaces.md`. Auto-generate OpenAPI spec from code. | `PENDING` |
+| **PLAZA-DEBT-004** | **38 of 81 Tests Failing:** Code/test drift from method name changes (e.g., `searchWithProvider` no longer exists). | Update tests to match current API signatures. Ref: Phase 16 TEST-09. | `OPEN` |
 
 ## P2: Planning Manifest Debt
 
@@ -44,6 +45,7 @@ The primary source of work for Plaza is the systematic porting and productionizi
 
 | Version | Date | Author | Changes |
 | :--- | :--- | :--- | :--- |
+| 2.1.0 | 2026-03-21 | Phase 16 Audit | Added PLAZA-DEBT-004: 38 of 81 tests failing (code/test drift). Scored 7/10. Promoted to STABLE. |
 | 2.2.0 | 2026-03-20 | Remediation Agent | RESOLVED PLAZA-DEBT-003: first-principles audit confirmed 4 phase files (00–03) all COMPLETE. Set total_phases:4, completed_phases:[00-03], current_phase:COMPLETE. |
 | 2.1.0 | 2026-03-20 | Remediation Agent | Added PLAZA-DEBT-003: missing manifest phase fields, operator input required. |
 | 2.0.0 | 2026-02-24 | NizamIQ | Overhauled document. Added the formal porting backlog from `meridian-prime`. |
