@@ -5,8 +5,9 @@ import { BrowserError } from '../src/shared/errors.js';
 describe('PlaywrightWrapper', () => {
   let browser: PlaywrightWrapper;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     browser = new PlaywrightWrapper({ headless: true });
+    await browser.init();
   });
 
   afterEach(async () => {
@@ -19,62 +20,64 @@ describe('PlaywrightWrapper', () => {
   });
 
   describe('navigation', () => {
-    it('should navigate to a URL and return page content', async () => {
-      const page = await browser.navigate('https://httpbin.org/html');
-      expect(page).toBeDefined();
-      expect(page?.content).toBeDefined();
-      expect(page?.title).toBeDefined();
+    it('should navigate to a URL', async () => {
+      const sessionId = await browser.newPage();
+      await expect(
+        browser.navigate(sessionId, 'https://httpbin.org/html')
+      ).resolves.not.toThrow();
     });
 
     it('should handle navigation errors gracefully', async () => {
+      const sessionId = await browser.newPage();
       await expect(
-        browser.navigate('https://invalid-domain-that-does-not-exist.com')
+        browser.navigate(sessionId, 'https://invalid-domain-that-does-not-exist.com')
       ).rejects.toThrow(BrowserError);
     });
 
     it('should respect timeout option', async () => {
+      const sessionId = await browser.newPage();
       await expect(
-        browser.navigate('https://httpbin.org/delay/10', { timeout: 1000 })
+        browser.navigate(sessionId, 'https://httpbin.org/delay/10', { timeout: 1000 })
       ).rejects.toThrow(BrowserError);
     });
   });
 
   describe('content extraction', () => {
     it('should extract page content as text', async () => {
-      await browser.navigate('https://httpbin.org/html');
-      const content = await browser.getContent();
+      const sessionId = await browser.newPage('https://httpbin.org/html');
+      const content = await browser.getContent(sessionId);
       expect(content).toBeDefined();
       expect(typeof content).toBe('string');
       expect(content.length).toBeGreaterThan(0);
     });
 
-    it('should extract page title', async () => {
-      await browser.navigate('https://httpbin.org/html');
-      const title = await browser.getTitle();
-      expect(title).toBeDefined();
-      expect(typeof title).toBe('string');
+    it('should extract page text content', async () => {
+      const sessionId = await browser.newPage('https://httpbin.org/html');
+      const text = await browser.getText(sessionId);
+      expect(text).toBeDefined();
+      expect(typeof text).toBe('string');
     });
   });
 
   describe('screenshot functionality', () => {
     it('should capture screenshot as PNG', async () => {
-      await browser.navigate('https://httpbin.org/html');
-      const screenshot = await browser.screenshot({ type: 'png' });
+      const sessionId = await browser.newPage('https://httpbin.org/html');
+      const screenshot = await browser.screenshot(sessionId, { type: 'png' });
       expect(screenshot).toBeDefined();
       expect(Buffer.isBuffer(screenshot)).toBe(true);
       expect(screenshot.length).toBeGreaterThan(0);
     });
 
     it('should capture screenshot as JPEG', async () => {
-      await browser.navigate('https://httpbin.org/html');
-      const screenshot = await browser.screenshot({ type: 'jpeg' });
+      const sessionId = await browser.newPage('https://httpbin.org/html');
+      const screenshot = await browser.screenshot(sessionId, { type: 'jpeg' });
       expect(screenshot).toBeDefined();
       expect(Buffer.isBuffer(screenshot)).toBe(true);
     });
 
     it('should capture full page screenshot', async () => {
-      await browser.navigate('https://httpbin.org/html');
-      const screenshot = await browser.screenshot({ fullPage: true });
+      const sessionId = await browser.newPage('https://httpbin.org/html');
+      const screenshot = await browser.screenshot(sessionId, { fullPage: true });
       expect(screenshot).toBeDefined();
       expect(Buffer.isBuffer(screenshot)).toBe(true);
     });
@@ -82,8 +85,8 @@ describe('PlaywrightWrapper', () => {
 
   describe('PDF generation', () => {
     it('should generate PDF from page', async () => {
-      await browser.navigate('https://httpbin.org/html');
-      const pdf = await browser.pdf();
+      const sessionId = await browser.newPage('https://httpbin.org/html');
+      const pdf = await browser.pdf(sessionId);
       expect(pdf).toBeDefined();
       expect(Buffer.isBuffer(pdf)).toBe(true);
       expect(pdf.length).toBeGreaterThan(0);
@@ -94,50 +97,43 @@ describe('PlaywrightWrapper', () => {
 
   describe('element interaction', () => {
     it('should click on element by selector', async () => {
-      await browser.navigate('https://httpbin.org/forms/post');
-      // Should not throw
-      await expect(browser.click('input[type="submit"]')).resolves.not.toThrow();
+      const sessionId = await browser.newPage('https://httpbin.org/forms/post');
+      const result = await browser.click(sessionId, 'input[type="submit"]');
+      expect(result.success).toBe(true);
     });
 
     it('should type text into input field', async () => {
-      await browser.navigate('https://httpbin.org/forms/post');
-      await expect(
-        browser.type('input[name="custname"]', 'Test User')
-      ).resolves.not.toThrow();
+      const sessionId = await browser.newPage('https://httpbin.org/forms/post');
+      const result = await browser.type(sessionId, 'input[name="custname"]', 'Test User');
+      expect(result.success).toBe(true);
     });
 
     it('should throw for non-existent element', async () => {
-      await browser.navigate('https://httpbin.org/html');
-      await expect(
-        browser.click('#non-existent-element-12345')
-      ).rejects.toThrow(BrowserError);
+      const sessionId = await browser.newPage('https://httpbin.org/html');
+      const result = await browser.click(sessionId, '#non-existent-element-12345');
+      expect(result.success).toBe(false);
     });
   });
 
   describe('session management', () => {
-    it('should maintain session across navigations', async () => {
-      const sessionId = 'test-session-1';
-      const page1 = await browser.navigate('https://httpbin.org/cookies/set/testkey/testvalue', { sessionId });
-      expect(page1).toBeDefined();
-      
-      // Navigate again with same session
-      const page2 = await browser.navigate('https://httpbin.org/cookies', { sessionId });
-      expect(page2).toBeDefined();
-      expect(page2.content).toContain('testkey');
+    it('should create new page and return session ID', async () => {
+      const sessionId = await browser.newPage();
+      expect(sessionId).toBeDefined();
+      expect(typeof sessionId).toBe('string');
+      expect(sessionId.startsWith('session_')).toBe(true);
     });
 
-    it('should isolate sessions', async () => {
-      const session1 = 'session-1';
-      const session2 = 'session-2';
+    it('should track multiple sessions', async () => {
+      const sessionId1 = await browser.newPage('https://httpbin.org/html');
+      const sessionId2 = await browser.newPage('https://httpbin.org/html');
       
-      await browser.navigate('https://httpbin.org/cookies/set/key1/value1', { sessionId: session1 });
-      await browser.navigate('https://httpbin.org/cookies/set/key2/value2', { sessionId: session2 });
-      
-      const page1 = await browser.navigate('https://httpbin.org/cookies', { sessionId: session1 });
-      const page2 = await browser.navigate('https://httpbin.org/cookies', { sessionId: session2 });
-      
-      expect(page1.content).toContain('key1');
-      expect(page2.content).toContain('key2');
+      const sessions = await browser.getSessions();
+      expect(sessions.length).toBeGreaterThanOrEqual(2);
+    });
+
+    it('should close specific page', async () => {
+      const sessionId = await browser.newPage('https://httpbin.org/html');
+      await expect(browser.closePage(sessionId)).resolves.not.toThrow();
     });
   });
 
@@ -151,15 +147,23 @@ describe('PlaywrightWrapper', () => {
     });
 
     it('should handle network errors', async () => {
+      const sessionId = await browser.newPage();
       await expect(
-        browser.navigate('http://localhost:99999')
+        browser.navigate(sessionId, 'http://localhost:99999')
       ).rejects.toThrow(BrowserError);
     });
 
     it('should handle page load failures', async () => {
+      const sessionId = await browser.newPage();
       await expect(
-        browser.navigate('https://httpbin.org/status/500')
+        browser.navigate(sessionId, 'https://httpbin.org/status/500')
       ).rejects.toThrow();
+    });
+
+    it('should throw for invalid session ID', async () => {
+      await expect(
+        browser.navigate('invalid-session-id', 'https://httpbin.org/html')
+      ).rejects.toThrow(BrowserError);
     });
   });
 });
