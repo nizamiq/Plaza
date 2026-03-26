@@ -37,7 +37,7 @@ jobs:
   # ===================================================================
   coderabbit-review:
     name: "Gate 3a — AI Review (CodeRabbit)"
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     if: github.event_name == 'pull_request'
     needs: [test]
     permissions:
@@ -53,8 +53,11 @@ jobs:
       - uses: coderabbitai/ai-pr-reviewer@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.LITELLM_API_KEY || secrets.OPENAI_API_KEY }}
         with:
+          openai_base_url: "http://litellm.litellm.svc.cluster.local:4000/v1"
+          openai_light_model: "gpt-4o-mini"
+          openai_heavy_model: "gpt-4o"
           debug: false
           review_simple_changes: false
           review_comment_lgtm: false
