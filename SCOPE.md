@@ -34,4 +34,4 @@ Document-specific processing such as PDF parsing and smart extraction (handled b
 | :--- | :--- |
 | **Master Strategy** | [nizamiq/nizamiq-strategy](https://github.com/nizamiq/nizamiq-strategy) |
 | **Ecosystem Map** | [ECOSYSTEM.json](https://github.com/nizamiq/nizamiq-strategy/blob/main/ECOSYSTEM.json) |
-| **Architecture** | [ecosystem_architecture.md](https://github.com/nizamiq/nizamiq-strategy/blob/main/03_technical/ecosystem_architecture.md) |
+| **Architecture** | [ecosystem_architecture.md](https://github.com/nizamiq/nizamiq-strategy/blob/main/docs/architecture/ecosystem_architecture.md) |

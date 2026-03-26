@@ -17,7 +17,7 @@ This project is a component of the broader NizamIQ Ecosystem. The master archite
 | :--- | :--- |
 | **Master Strategy** | [nizamiq/nizamiq-strategy](https://github.com/nizamiq/nizamiq-strategy) |
 | **Ecosystem Map** | [ECOSYSTEM.json](https://github.com/nizamiq/nizamiq-strategy/blob/main/ECOSYSTEM.json) |
-| **Architecture** | [ecosystem_architecture.md](https://github.com/nizamiq/nizamiq-strategy/blob/main/03_technical/ecosystem_architecture.md) |
-| **Master Roadmap** | [master_roadmap.md](https://github.com/nizamiq/nizamiq-strategy/blob/main/02_operational/master_roadmap.md) |
-| **Technical Debt Register** | [technical_debt_register.md](https://github.com/nizamiq/nizamiq-strategy/blob/main/03_technical/technical_debt_register.md) |
+| **Architecture** | [ecosystem_architecture.md](https://github.com/nizamiq/nizamiq-strategy/blob/main/docs/architecture/ecosystem_architecture.md) |
+| **Master Roadmap** | [master_roadmap.md](https://github.com/nizamiq/nizamiq-strategy/blob/main/docs/planning/master_roadmap.md) |
+| **Technical Debt Register** | [technical_debt_register.md](https://github.com/nizamiq/nizamiq-strategy/blob/main/docs/architecture/technical_debt_register.md) |
 | **CI/CD Standards** | [ci_cd_standards.md](https://github.com/nizamiq/nizamiq-strategy/blob/main/docs/governance/ci_cd_standards.md) |
