@@ -1,19 +1,19 @@
 ---
 id: plaza-mcp-server-architecture
 title: "Plaza MCP Server Architecture"
-description: "Architecture documentation for Plaza as an MCP (Model Context Protocol) Tooling Platform, including component design, tool registration flow, and Atlas integration."
-tags: [architecture, mcp, plaza, mcp-server, tooling-platform, atlas]
+description: "Architecture documentation for Plaza as an MCP tooling platform, including component design, tool registration flow, and Aegis integration."
+tags: [architecture, mcp, plaza, mcp-server, tooling-platform, aegis]
 status: STABLE
-last_audited: "2026-03-05"
+last_audited: "2026-03-26"
 authoritative_source: "src/mcp-server.ts"
-version: "1.0.0"
+version: "1.0.1"
 ---
 
 # Plaza MCP Server Architecture
 
 ## Overview
 
-Plaza is the central **MCP (Model Context Protocol) Tooling Platform** for the NizamIQ ecosystem. It provides a suite of production-grade tools exposed as MCP services that can be consumed by any agent or service within the ecosystem. The platform is built on **TypeScript/Node.js** with **Express.js** for REST APIs and integrates with **Aegis** (via Atlas) for authentication and authorization.
+Plaza is the central **MCP (Model Context Protocol) Tooling Platform** for the NizamIQ ecosystem. It provides a suite of production-grade tools exposed as MCP services that can be consumed by any agent or service within the ecosystem. The platform is built on **TypeScript/Node.js** with **Express.js** for REST APIs and integrates with **Aegis** for authentication and authorization.
 
 ## Tech Stack
 
@@ -26,7 +26,7 @@ Plaza is the central **MCP (Model Context Protocol) Tooling Platform** for the N
 | **Browser Automation** | Playwright | 1.40+ |
 | **Web Scraping** | Axios, Cheerio | Latest |
 | **Validation** | Zod | 4.3+ |
-| **Authentication** | Aegis/Atlas Integration | - |
+| **Authentication** | Aegis integration | - |
 
 ## Core Components
 
@@ -216,16 +216,16 @@ All tool responses follow the MCP content format:
 }
 ```
 
-## Atlas (Aegis) Integration
+## Aegis Integration
 
-Plaza integrates with **Atlas** (via the Aegis service) for enterprise-grade security.
+Plaza integrates with **Aegis** for token validation, authorization checks, and audit logging.
 
 ### Authentication Flow
 
 ```
 ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
 │   Client    │────▶│ Plaza API   │────▶│   Aegis     │
-│             │     │   Server    │     │  (Atlas)    │
+│             │     │   Server    │     │             │
 └─────────────┘     └─────────────┘     └─────────────┘
        │                   │                   │
        │ Authorization:    │ POST /auth/       │
@@ -324,4 +324,4 @@ To add a new tool to Plaza:
 - [REST API Endpoints](./../api/rest_endpoints.md)
 - [OpenAPI Specification](./../openapi.yaml)
 - [CONTEXT.md](./../../CONTEXT.md) - Project overview and commands
-- [Atlas Security Documentation](https://github.com/nizamiq/atlas) - Authentication details
+- [Aegis Documentation](https://github.com/nizamiq/Aegis) - Authentication details

@@ -8,10 +8,10 @@ tags:
   - plaza
   - porting-plan
   - knowledge-preservation
-status: ACTIVE
-last_audited: "2026-02-24"
+status: STABLE
+last_audited: "2026-03-26"
 authoritative_source: "docs/planning/artefacts/meridian_prime_porting_plan.md"
-version: "1.1.0"
+version: "1.1.1"
 ---
 
 # Meridian: Porting Plan from `meridian-prime` (v1.1)

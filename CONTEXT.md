@@ -1,17 +1,17 @@
 ---
 id: plaza-context-v2
 title: "Plaza: AI Agent Context"
-description: "Primary entry point for AI agents working on the Plaza MCP Tooling Platform. This version reflects the formal porting plan from meridian-prime."
+description: "Primary entry point for AI agents working on the Plaza MCP tooling platform and its TypeScript/Node runtime."
 tags: [context, plaza, mcp, agents]
 status: STABLE
-last_audited: "2026-03-05"
+last_audited: "2026-03-26"
 authoritative_source: "CONTEXT.md"
-version: 2.0.0
+version: 2.0.1
 ---
 
 # CONTEXT.md (v2.0)
 
-**LAST UPDATED:** 2026-02-24
+**LAST UPDATED:** 2026-03-26
 
 ## 1. System Architecture & Purpose
 
@@ -19,10 +19,10 @@ Plaza is the central, authoritative, and generic **agentic tooling platform** fo
 
 ## 2. Dependency & Integration Map
 
-- **Languages:** TypeScript (Primary), Python (for specific ML/data science tools)
-- **Frameworks/Runtimes:** Node.js, MCP (Model Context Protocol)
-- **Key Libraries:** Playwright, Axios, Cheerio
-- **Databases:** Redis (caching), PostgreSQL (metadata, optional)
+- **Language:** TypeScript
+- **Frameworks/Runtimes:** Node.js 18+, Express, MCP (Model Context Protocol)
+- **Key Libraries:** Playwright, Axios, Cheerio, Zod, Swagger UI
+- **Runtime Services:** No required database in the current codebase; Docker Compose includes optional Redis and monitoring services
 - **Consumers:** `nizamiq/meridian`, and any other agentic system in the ecosystem.
 
 ## 3. Execution Commands
@@ -32,9 +32,10 @@ Plaza is the central, authoritative, and generic **agentic tooling platform** fo
 | **Install Dependencies** | `npm install` |
 | **Run Tests** | `npm test` |
 | **Run Linter** | `npm run lint` |
+| **Run Typecheck** | `npm run typecheck` |
 | **Build Project** | `npm run build` |
-| **Run Locally** | `npm run dev` |
-| **Start MCP Server** | `npm run start:mcp` |
+| **Run REST API Locally** | `npx tsx src/api-server.ts` |
+| **Run MCP Server Locally** | `npx tsx src/mcp-server.ts` |
 
 ## 4. CI/CD Pipeline (NizamIQ Golden Pipeline)
 

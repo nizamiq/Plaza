@@ -589,4 +589,4 @@ searchData.results.forEach((result: any) => {
 - [MCP Server Architecture](./../architecture/mcp_server.md)
 - [OpenAPI Specification](./../openapi.yaml)
 - [CONTEXT.md](./../../CONTEXT.md) - Project overview
-- [Aegis/Atlas Documentation](https://github.com/nizamiq/atlas) - Authentication details
+- [Aegis/Atlas Documentation](https://github.com/nizamiq/Atlas) - Authentication details

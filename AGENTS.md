@@ -4,7 +4,7 @@ title: "Plaza: AI Agent Guidelines"
 description: "Agent guidelines, scope checks, and governance directives for the Plaza MCP Tooling Platform."
 tags: [agents, governance, plaza, mcp, scope]
 status: STABLE
-last_audited: "2026-02-23"
+last_audited: "2026-03-25"
 authoritative_source: "AGENTS.md"
 version: 1.0.0
 ---
@@ -37,7 +37,7 @@ Before taking any action in this repository, complete the following steps in ord
 >
 > **If a repository is not listed as `in_scope` or `incubating` in `ECOSYSTEM.json`, do not perform any work on it.** Treat it as out of scope by default.
 >
-> **Active in-scope repositories:** `nizamiq-strategy`, `nizamiq.com`, `nizamiq-methodology`, `anchorlink`, `meridian`, `Fireside`, `Cornerstone`, `KubeClaw`, `Recce`, `Atlas`, `Aegis`, `gateway-config`, `documentation-standard`, `zitadel-config`, `Plaza`, `Canon`, `Charter`, `apex`, `tracer`, `Arnold`, `playbooks`
+> **Active in-scope repositories:** `nizamiq-strategy`, `nizamiq.com`, `nizamiq-methodology`, `anchorlink`, `meridian`, `Fireside`, `Cornerstone`, `Plinth`, `Recce`, `Atlas`, `Aegis`, `gateway-config`, `documentation-standard`, `zitadel-config`, `Plaza`, `Canon`, `Charter`, `Apex`, `Tracer`, `Arnold`, `playbooks`
 
 **Incubating:** `Axiom`
 
@@ -73,9 +73,7 @@ After bootstrap, read `/home/ubuntu/governance/templates/governance/AI_AGENT_INS
 
 ## Current Phase
 
-**Phase 00: Project Initialization**
-
-See [manifest.json](./docs/planning/manifest.json) for detailed phase information.
+**Status:** Active (FUNCTIONAL). See [ECOSYSTEM.json](https://github.com/nizamiq/nizamiq-strategy/blob/main/ECOSYSTEM.json) and [manifest.json](./docs/planning/manifest.json) for detailed phase information.
 
 ## Project Purpose
 
