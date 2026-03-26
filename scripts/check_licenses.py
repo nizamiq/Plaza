@@ -1,0 +1,1 @@
+Dummy Check Licenses Script
