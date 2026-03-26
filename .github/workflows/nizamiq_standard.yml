@@ -66,12 +66,12 @@ jobs:
   pipeline-completion:
     name: "Gate 5 — Pipeline Completion"
     runs-on: ubuntu-latest
-    needs: [build-and-scan]
+    needs: [security-scan]
     if: always()
     steps:
       - run: |
-          if [ "${{ needs.build-and-scan.result }}" != "success" ] && [ "${{ needs.build-and-scan.result }}" != "skipped" ]; then
-            echo "Build and security scan failed"
+          if [ "${{ needs.security-scan.result }}" != "success" ]; then
+            echo "Security scan failed or was skipped"
             exit 1
           fi
           echo "Pipeline completed successfully"
