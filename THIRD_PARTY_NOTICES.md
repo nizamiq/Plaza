@@ -1,5 +1,5 @@
 ---
-id: "third_party_notices"
+id: "third-party-notices"
 title: "Third Party Notices"
 description: "Third Party Notices documentation for Plaza"
 tags: ["plaza", "frontend"]
