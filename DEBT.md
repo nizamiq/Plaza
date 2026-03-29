@@ -28,3 +28,44 @@ This register tracks all known technical debt and gaps for the `Plaza` project. 
 | Version | Date | Author | Changes |
 | :--- | :--- | :--- | :--- |
 | 1.0.0 | 2026-02-24 | NizamIQ | Initial creation from February 2026 audit findings. |
+
+## DEBT-API-001: OpenAPI Specification Completeness
+
+| Field | Value |
+|-------|-------|
+| **ID** | DEBT-API-001 |
+| **Severity** | MEDIUM |
+| **Priority** | P2 |
+| **Category** | API Documentation |
+| **Status** | IN_PROGRESS |
+| **Discovered** | 2026-03-29 |
+| **Discovered By** | NizamIQ OpenAPI Assessment & Governance Remediation Agent |
+
+### Description
+
+The OpenAPI specification for `Plaza` was assessed at **8/10** completeness.
+An auto-generated specification has been created at the canonical path but requires human review
+to expand schemas from generic `SuccessResponse` to precise, Pydantic-derived models.
+
+### Evidence
+
+- Pre-remediation score: 8/10
+- Missing: full request/response schemas, examples, error models
+- Missing: CI validation pipeline integration
+- Missing: Atlas contract registry registration
+
+### Remediation Steps
+
+1. Review and validate the auto-generated `openapi.yaml`
+2. Expand all `SuccessResponse` schemas with precise models
+3. Add spectral/openapi-validator to CI pipeline
+4. Register spec in Atlas contract registry
+
+### Acceptance Criteria
+
+- [ ] openapi.yaml passes spectral lint with zero errors
+- [ ] All endpoints have full request/response schemas
+- [ ] Spec registered in Atlas
+- [ ] CI validates spec on every PR
+
+---
