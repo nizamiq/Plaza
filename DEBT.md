@@ -28,3 +28,9 @@ This register tracks all known technical debt and gaps for the `Plaza` project. 
 | Version | Date | Author | Changes |
 | :--- | :--- | :--- | :--- |
 | 1.0.0 | 2026-02-24 | NizamIQ | Initial creation from February 2026 audit findings. |
+
+### DEBT-AUTH-001: Implement Aegis RBAC Integration
+- **Description**: Integrate Aegis RBAC enforcement into the Plaza Backend-for-Frontend (BFF) or API routes.
+- **Impact**: High - Security vulnerability due to bypassed or missing authentication/authorization.
+- **Remediation**: Execute Phase 05 (`phase_05_auth_remediation.yaml`).
+- **Status**: Open
