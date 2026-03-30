@@ -25,12 +25,15 @@
   "source_files_created": 27,
   "test_files_created": 6,
   "deployment_files_created": 24,
-  "total_phases": 4,
+  "total_phases": 5,
   "completed_phases": [
     "00",
     "01",
     "02",
     "03"
   ],
-  "current_phase": "COMPLETED"
+  "current_phase": "COMPLETED",
+  "phase_map": {
+    "05": "phase_05_auth_remediation.yaml"
+  }
 }

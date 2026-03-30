@@ -29,14 +29,8 @@ This register tracks all known technical debt and gaps for the `Plaza` project. 
 | :--- | :--- | :--- | :--- |
 | 1.0.0 | 2026-02-24 | NizamIQ | Initial creation from February 2026 audit findings. |
 
-## Gaps from March 2026 Ecosystem Audit
-
-- **GAP-ID:** PLAZA-001
-- **Priority:** P1
-- **Description:** Auth Middleware Duplication. The repository contains a copy-pasted `zitadel_auth` middleware instead of using the centralized `aegis-sdk`.
-- **Resolution:** Remove local auth middleware and integrate `aegis-sdk`. Tracked in next remediation phase.
-
-- **GAP-ID:** PLAZA-002
-- **Priority:** P2
-- **Description:** Missing `opencode.json` and UDS gaps.
-- **Resolution:** Add `opencode.json` and ensure all UDS files (CONTEXT.md, AGENTS.md) are fully compliant. Tracked in next remediation phase.
+### DEBT-AUTH-001: Implement Aegis RBAC Integration
+- **Description**: Integrate Aegis RBAC enforcement into the Plaza Backend-for-Frontend (BFF) or API routes.
+- **Impact**: High - Security vulnerability due to bypassed or missing authentication/authorization.
+- **Remediation**: Execute Phase 05 (`phase_05_auth_remediation.yaml`).
+- **Status**: Open
