@@ -101,3 +101,5 @@ The following are explicit boundaries for this repository. Agents must not imple
 ## Ecosystem Dependencies
 
 For the full cross-repo dependency graph, blast-radius index, and critical path analysis, see [`DEPENDENCY_MAP.md`](https://github.com/nizamiq/nizamiq-strategy/blob/main/DEPENDENCY_MAP.md).
+
+> **March 2026 Audit Note:** This repository contains duplicated `zitadel_auth` middleware and is missing `opencode.json`. These issues are slated for remediation in the next phase to comply with ecosystem standards (Aegis SDK adoption and UDS compliance).
