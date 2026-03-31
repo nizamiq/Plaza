@@ -25,15 +25,20 @@
   "source_files_created": 27,
   "test_files_created": 6,
   "deployment_files_created": 24,
-  "total_phases": 5,
+  "total_phases": 4,
   "completed_phases": [
     "00",
     "01",
     "02",
     "03"
   ],
-  "current_phase": "COMPLETED",
-  "phase_map": {
-    "05": "phase_05_auth_remediation.yaml"
-  }
+  "current_phase": "phase_05_openapi_remediation",
+  "phases": [
+    {
+      "id": "phase_05_openapi_remediation",
+      "title": "OpenAPI Specification & Governance Remediation",
+      "status": "IN_PROGRESS"
+    }
+  ],
+  "updated": "2026-03-29"
 }

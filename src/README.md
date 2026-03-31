@@ -1,3 +1,14 @@
+---
+id: "readme"
+title: "Readme"
+description: "Readme documentation for Plaza"
+tags: ["plaza", "frontend"]
+status: STABLE
+last_audited: "2026-03-29"
+authoritative_source: "src/README.md"
+version: "1.0.0"
+---
+
 # Source Directory
 
 This directory will contain the source code for Plaza MCP services.
