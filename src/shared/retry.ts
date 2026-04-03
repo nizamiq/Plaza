@@ -1,7 +1,7 @@
-import pRetry from 'p-retry';
-import type { RetryOptions } from './types.js';
+import pRetry from "p-retry";
+import type { RetryOptions } from "./types.js";
 
-const DEFAULT_OPTIONS: Required<Omit<RetryOptions, 'onRetry'>> = {
+const DEFAULT_OPTIONS: Required<Omit<RetryOptions, "onRetry">> = {
   retries: 3,
   minTimeout: 1000,
   maxTimeout: 30000,
@@ -10,7 +10,7 @@ const DEFAULT_OPTIONS: Required<Omit<RetryOptions, 'onRetry'>> = {
 
 export async function withRetry<T>(
   fn: () => Promise<T>,
-  options: RetryOptions = {}
+  options: RetryOptions = {},
 ): Promise<T> {
   const opts = { ...DEFAULT_OPTIONS, ...options };
 
@@ -19,16 +19,15 @@ export async function withRetry<T>(
     minTimeout: opts.minTimeout,
     maxTimeout: opts.maxTimeout,
     factor: opts.factor,
-    onFailedAttempt: (error) => {
+    onFailedAttempt: (error: Error & { attemptNumber: number }) => {
       opts.onRetry?.(error, error.attemptNumber);
     },
   });
 }
 
-export function createRetryable<T extends (...args: unknown[]) => Promise<unknown>>(
-  fn: T,
-  options: RetryOptions = {}
-): T {
+export function createRetryable<
+  T extends (...args: unknown[]) => Promise<unknown>,
+>(fn: T, options: RetryOptions = {}): T {
   return (async (...args: unknown[]) => {
     return withRetry(() => fn(...args), options);
   }) as T;
