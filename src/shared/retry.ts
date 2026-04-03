@@ -1,4 +1,4 @@
-import pRetry from "p-retry";
+import pRetry, { type RetryContext } from "p-retry";
 import type { RetryOptions } from "./types.js";
 
 const DEFAULT_OPTIONS: Required<Omit<RetryOptions, "onRetry">> = {
@@ -19,8 +19,8 @@ export async function withRetry<T>(
     minTimeout: opts.minTimeout,
     maxTimeout: opts.maxTimeout,
     factor: opts.factor,
-    onFailedAttempt: (error: Error & { attemptNumber: number }) => {
-      opts.onRetry?.(error, error.attemptNumber);
+    onFailedAttempt: (context: RetryContext) => {
+      opts.onRetry?.(context.error, context.attemptNumber);
     },
   });
 }
