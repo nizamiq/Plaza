@@ -30,7 +30,7 @@ COPY . .
 RUN npm run build
 
 # Stage 3: Production
-FROM mcr.microsoft.com/playwright:v1.58.2-jammy AS production
+FROM mcr.microsoft.com/playwright:v1.59.1-jammy AS production
 
 WORKDIR /app
 

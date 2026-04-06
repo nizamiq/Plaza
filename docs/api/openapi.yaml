@@ -1,0 +1,25 @@
+openapi: 3.1.0
+info:
+  title: Plaza
+  description: Plaza Frontend API
+  version: 1.0.0
+servers:
+- url: https://api.nizamiq.com
+  description: Production
+- url: http://localhost:8000
+  description: Local development
+paths:
+  /health:
+    get:
+      summary: Health check
+      operationId: get_health
+      responses:
+        '200':
+          description: Service is healthy
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Zitadel OIDC JWT token

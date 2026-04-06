@@ -32,8 +32,21 @@
     "02",
     "03"
   ],
+<<<<<<< HEAD
   "current_phase": "COMPLETED",
   "phase_map": {
     "05": "phase_05_auth_remediation.yaml"
   }
 }
+=======
+  "current_phase": "phase_05_openapi_remediation",
+  "phases": [
+    {
+      "id": "phase_05_openapi_remediation",
+      "title": "OpenAPI Specification & Governance Remediation",
+      "status": "IN_PROGRESS"
+    }
+  ],
+  "updated": "2026-03-29"
+}
+>>>>>>> main

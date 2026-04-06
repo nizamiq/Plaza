@@ -1,0 +1,27 @@
+name: OpenAPI Lint
+
+on:
+  pull_request:
+    paths:
+      - 'docs/api/openapi.yaml'
+      - '.spectral.yaml'
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'docs/api/openapi.yaml'
+
+jobs:
+  spectral-lint:
+    name: Spectral OAS Lint
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install Spectral
+        run: npm install -g @stoplight/spectral-cli
+
+      - name: Lint OpenAPI spec
+        run: spectral lint docs/api/openapi.yaml --ruleset .spectral.yaml --fail-severity error

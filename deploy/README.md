@@ -1,3 +1,14 @@
+---
+id: "readme"
+title: "Readme"
+description: "Readme documentation for Plaza"
+tags: ["plaza", "frontend"]
+status: STABLE
+last_audited: "2026-03-29"
+authoritative_source: "deploy/README.md"
+version: "1.0.0"
+---
+
 # Plaza Deployment
 
 This directory contains all deployment configurations for the Plaza MCP Tooling Platform.
