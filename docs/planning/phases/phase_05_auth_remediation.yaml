@@ -1,0 +1,18 @@
+id: "05"
+title: "Implement Aegis RBAC Integration"
+description: "Integrate Aegis RBAC enforcement into the Plaza Backend-for-Frontend (BFF) or API routes."
+status: "pending"
+dependencies: []
+tasks:
+  - id: "05.1"
+    title: "Add `aegis-sdk` or equivalent HTTP client logic to the project dependencies."
+    status: "pending"
+  - id: "05.2"
+    title: "Implement an Aegis client wrapper for authorization checks."
+    status: "pending"
+  - id: "05.3"
+    title: "Add authorization checks to all protected API routes or BFF endpoints."
+    status: "pending"
+  - id: "05.4"
+    title: "Ensure the frontend correctly handles 403 Forbidden responses from Aegis."
+    status: "pending"

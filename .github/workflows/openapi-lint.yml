@@ -15,10 +15,17 @@ on:
 jobs:
   spectral-lint:
     name: Spectral OAS Lint
-    runs-on: ubuntu-latest
+<<<<<<< HEAD
+    runs-on: self-hosted
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+=======
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+>>>>>>> main
 
       - name: Install Spectral
         run: npm install -g @stoplight/spectral-cli
