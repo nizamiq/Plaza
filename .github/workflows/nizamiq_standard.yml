@@ -22,7 +22,7 @@ jobs:
   # ===================================================================
   test:
     name: "Gate 2 — Document Validation"
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [doc-lint]
     steps:
       - uses: actions/checkout@v6
@@ -37,7 +37,7 @@ jobs:
   # ===================================================================
   security-scan:
     name: "Gate 4 — Security Scan"
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [test]
     permissions:
       contents: read
@@ -65,7 +65,7 @@ jobs:
   # ===================================================================
   pipeline-completion:
     name: "Gate 5 — Pipeline Completion"
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [security-scan]
     if: always()
     steps:
