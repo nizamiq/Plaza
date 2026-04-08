@@ -1,17 +1,19 @@
 ---
 id: meridian-porting-plan
-title: "Meridian: Porting Plan from meridian-prime"
-description: "A comprehensive, actionable plan for porting high-value intellectual property from nizamiq/meridian-prime to nizamiq/meridian, leaving all technical debt behind. This version reflects the extraction of generic MCP tools to nizamiq/Plaza."
+title: 'Meridian: Porting Plan from meridian-prime'
+description: A comprehensive, actionable plan for porting high-value intellectual
+  property from nizamiq/meridian-prime to nizamiq/meridian, leaving all technical
+  debt behind. This version reflects the extractio...
 tags:
-  - meridian
-  - meridian-prime
-  - plaza
-  - porting-plan
-  - knowledge-preservation
+- meridian
+- meridian-prime
+- plaza
+- porting-plan
+- knowledge-preservation
 status: STABLE
-last_audited: "2026-03-26"
-authoritative_source: "docs/planning/artefacts/meridian_prime_porting_plan.md"
-version: "1.1.1"
+last_audited: '2026-03-26'
+authoritative_source: docs/planning/artefacts/meridian_prime_porting_plan.md
+version: 1.1.1
 ---
 
 # Meridian: Porting Plan from `meridian-prime` (v1.1)

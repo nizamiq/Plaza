@@ -89,6 +89,11 @@ With the core services ported and integrated, the immediate focus is on packagin
 
 See the [planning manifest](./docs/planning/manifest.json) and [Phase 03 plan](./docs/planning/phases/phase_03_packaging.yaml) for details.
 
+
+## Documentation Structure
+
+This repository follows the **flat-canonical** strategy defined in UDS Section 3.1.5. All documentation resides in the UDS-mandated flat directories (`docs/architecture/`, `docs/api/`, `docs/governance/`, `docs/planning/`).
+
 ## Out of Scope
 
 The following are explicit boundaries for this repository. Agents must not implement, refactor, or propose work in these areas without explicit operator authorisation:
